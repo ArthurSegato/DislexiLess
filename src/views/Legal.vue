@@ -735,6 +735,8 @@ import { reactive, computed, ref } from 'vue'
 import { vMaska } from 'maska'
 import { useFetch } from '@vueuse/core'
 
+const api_path = import.meta.env.VITE_API_PATH;
+
 const user = useUserStore()
 
 const headerButton = ref(false)
@@ -759,7 +761,7 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData)
 
-const { execute, isFetching, error, statusCode } = useFetch('http://localhost:3000/contact', {
+const { execute, isFetching, error, statusCode } = useFetch(`${api_path}/contact`, {
   immediate: false
 })
   .post(formData)

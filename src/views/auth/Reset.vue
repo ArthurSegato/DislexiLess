@@ -111,6 +111,8 @@ import { useFetch } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 import router from '@/router'
 
+const api_path = import.meta.env.VITE_API_PATH;
+
 const verification_token = useRoute().query.verificationToken
 
 const send = ref(false)
@@ -132,7 +134,7 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, formData)
 
 const { execute, isFetching, error, onFetchResponse } = useFetch(
-  'http://45.15.24.49:3000/auth/reset',
+  `${api_path}/auth/reset`,
   {
     headers: {
       Authorization: `Bearer ${verification_token}`

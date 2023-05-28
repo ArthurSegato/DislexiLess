@@ -70,10 +70,12 @@ import router from '@/router'
 import { useRoute } from 'vue-router'
 import { useFetch } from '@vueuse/core'
 
+const api_path = import.meta.env.VITE_API_PATH;
+
 const verification_token = useRoute().query.verificationToken
 
 const { error, onFetchResponse, onFetchError, isFetching } = useFetch(
-  'http://45.15.24.49:3000/auth/confirm',
+  `${api_path}/auth/confirm`,
   {
     headers: {
       Authorization: `Bearer ${verification_token}`

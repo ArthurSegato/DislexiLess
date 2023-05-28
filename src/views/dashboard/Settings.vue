@@ -175,6 +175,8 @@ import { required, email, minLength, helpers } from '@vuelidate/validators'
 import { vMaska } from 'maska'
 import { useFetch } from '@vueuse/core'
 
+const api_path = import.meta.env.VITE_API_PATH;
+
 const user = useUserStore()
 const settings = useSettingsStore()
 
@@ -199,7 +201,7 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, formData)
 
 const editUser = useFetch(
-  'http://45.15.24.49:3000/users/me',
+  `${api_path}/users/me`,
   {
     headers: {
       Authorization: `Bearer ${user.getToken}`
@@ -215,7 +217,7 @@ editUser.onFetchResponse(() => {
 })
 
 const deleteUser = useFetch(
-  'http://45.15.24.49:3000/users/me',
+  `${api_path}/users/me`,
   {
     headers: {
       Authorization: `Bearer ${user.getToken}`
@@ -229,7 +231,7 @@ const deleteUser = useFetch(
 deleteUser.onFetchResponse(() => user.reset())
 
 const { onFetchResponse, data, onFetchError, isFetching } = useFetch(
-  'http://45.15.24.49:3000/users/me',
+  `${api_path}/users/me`,
   {
     headers: {
       Authorization: `Bearer ${user.getToken}`

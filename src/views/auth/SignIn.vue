@@ -93,6 +93,8 @@ import { useUserStore } from '@/stores/user'
 import { useFetch } from '@vueuse/core'
 import router from '@/router'
 
+const api_path = import.meta.env.VITE_API_PATH;
+
 const user = useUserStore()
 
 const formData = reactive({
@@ -112,7 +114,7 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, formData)
 
 const { execute, isFetching, error, onFetchResponse, data } = useFetch(
-  'http://45.15.24.49:3000/auth/signin',
+  `${api_path}/auth/signin`,
   {
     immediate: false
   }

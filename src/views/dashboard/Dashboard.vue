@@ -442,13 +442,15 @@ import { computed, reactive, ref } from 'vue'
 import useVuelidate from '@vuelidate/core'
 import { email, required } from '@vuelidate/validators'
 
+const api_path = import.meta.env.VITE_API_PATH;
+
 const user = useUserStore()
 
 // FETCH PATIENTS
 const patients = ref([])
 
 const { onFetchResponse, data, onFetchError, isFetching, execute } = useFetch(
-  'http://45.15.24.49:3000/patients',
+  `${api_path}/patients`,
   {
     headers: {
       Authorization: `Bearer ${user.getToken}`
@@ -522,7 +524,7 @@ const fetchRegister = () => {
 }
 
 const registerPatientRequest = useFetch(
-  'http://45.15.24.49:3000/patients/register',
+  `${api_path}/patients/register`,
   {
     headers: {
       Authorization: `Bearer ${user.getToken}`
@@ -598,7 +600,7 @@ const sendUpdateRequest = () => {
 }
 
 const updatePatientRequest = useFetch(
-  'http://45.15.24.49:3000/patients/',
+  `${api_path}/patients/`,
   {
     headers: {
       Authorization: `Bearer ${user.getToken}`
@@ -615,7 +617,7 @@ updatePatientRequest.onFetchResponse((response) => {
 })
 
 const deletePatientRequest = useFetch(
-  'http://45.15.24.49:3000/patients/',
+  `${api_path}/patients/`,
   {
     headers: {
       Authorization: `Bearer ${user.getToken}`

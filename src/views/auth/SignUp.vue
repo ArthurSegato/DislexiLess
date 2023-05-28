@@ -118,6 +118,8 @@ import { reactive, computed } from 'vue'
 import { useFetch } from '@vueuse/core'
 import useVuelidate from '@vuelidate/core'
 
+const api_path = import.meta.env.VITE_API_PATH;
+
 const formData = reactive({
   name: '',
   email: '',
@@ -136,7 +138,7 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData)
 
-const { execute, isFetching, error, statusCode } = useFetch('http://45.15.24.49:3000/auth/signup', {
+const { execute, isFetching, error, statusCode } = useFetch(`${api_path}/auth/signup`, {
   immediate: false
 })
   .post(formData)
