@@ -116,7 +116,7 @@ import AuthFooter from '@/components/auth/AuthFooter.vue'
 import { required, email, minLength, helpers } from '@vuelidate/validators'
 import { reactive, computed } from 'vue'
 import { useFetch } from '@vueuse/core'
-import useVuelidate from '@vuelidate/core/index.js'
+import useVuelidate from '@vuelidate/core'
 
 const formData = reactive({
   name: '',

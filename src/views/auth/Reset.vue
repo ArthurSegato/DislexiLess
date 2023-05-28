@@ -104,7 +104,7 @@
 import AuthImg from '@/components/auth/AuthImg.vue'
 import AuthHeader from '@/components/auth/AuthHeader.vue'
 import AuthFooter from '@/components/auth/AuthFooter.vue'
-import { useVuelidate } from '@vuelidate/core/index.js'
+import { useVuelidate } from '@vuelidate/core'
 import { required, minLength, helpers, sameAs } from '@vuelidate/validators'
 import { reactive, computed, ref } from 'vue'
 import { useFetch } from '@vueuse/core'

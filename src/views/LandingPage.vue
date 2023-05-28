@@ -733,7 +733,7 @@ import { required, email } from '@vuelidate/validators'
 import { reactive, computed, ref } from 'vue'
 import { vMaska } from 'maska'
 import { useFetch } from '@vueuse/core'
-import useVuelidate from '@vuelidate/core/index.js'
+import useVuelidate from '@vuelidate/core'
 
 const user = useUserStore()
 

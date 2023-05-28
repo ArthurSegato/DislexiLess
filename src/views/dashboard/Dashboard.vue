@@ -439,7 +439,7 @@ import { useUserStore } from '@/stores/user'
 import { vMaska } from 'maska'
 import { useFetch } from '@vueuse/core'
 import { computed, reactive, ref } from 'vue'
-import useVuelidate from '@vuelidate/core/index.js'
+import useVuelidate from '@vuelidate/core'
 import { email, required } from '@vuelidate/validators'
 
 const user = useUserStore()
