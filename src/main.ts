@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import { MotionPlugin } from '@vueuse/motion'
+import { MotionPlugin } from 'node_modules/@vueuse/motion/dist'
 
 import App from './App.vue'
 import router from './router'

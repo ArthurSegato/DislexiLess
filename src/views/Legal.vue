@@ -729,7 +729,7 @@
 <script setup lang="ts">
 import SectionHeader from '@/components/SectionHeader.vue'
 import { useUserStore } from '@/stores/user'
-import { useVuelidate } from '@vuelidate/core'
+import { useVuelidate } from '@vuelidate/core/index.js'
 import { required, email } from '@vuelidate/validators'
 import { reactive, computed, ref } from 'vue'
 import { vMaska } from 'maska'
