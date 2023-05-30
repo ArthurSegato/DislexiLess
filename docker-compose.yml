@@ -1,0 +1,12 @@
+services:
+  front:
+    container_name: front_vue
+    build: .
+    ports:
+      - 80:80
+    env_file:
+      - .env
+    networks:
+      - dislexiless
+networks:
+  dislexiless:
