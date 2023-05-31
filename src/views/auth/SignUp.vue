@@ -117,6 +117,7 @@ import { required, email, minLength, helpers } from '@vuelidate/validators'
 import { reactive, computed } from 'vue'
 import { useFetch } from '@vueuse/core'
 import useVuelidate from '@vuelidate/core'
+import router from '@/router'
 
 const api_path = import.meta.env.VITE_API_PATH;
 
@@ -138,9 +139,12 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData)
 
-const { execute, isFetching, error, statusCode } = useFetch(`${api_path}/auth/signup`, {
+const { execute, isFetching, error, statusCode, onFetchResponse } = useFetch(`${api_path}/auth/signup`, {
   immediate: false
 })
   .post(formData)
   .json()
+onFetchResponse((response) => {
+  router.push({ name: 'signin'});
+})
 </script>
