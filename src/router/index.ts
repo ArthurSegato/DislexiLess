@@ -63,6 +63,11 @@ const router = createRouter({
       name: 'info',
       component: () => import('../views/dashboard/Info.vue'),
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: '404',
+      component: () => import('../views/NotFound.vue')
     }
   ]
 })

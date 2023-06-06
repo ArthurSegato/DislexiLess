@@ -735,7 +735,7 @@ import { reactive, computed, ref } from 'vue'
 import { vMaska } from 'maska'
 import { useFetch } from '@vueuse/core'
 
-const api_path = import.meta.env.VITE_API_PATH;
+const api_path = import.meta.env.VITE_API_PATH
 
 const user = useUserStore()
 

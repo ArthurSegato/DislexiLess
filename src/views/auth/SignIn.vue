@@ -93,7 +93,7 @@ import { useUserStore } from '@/stores/user'
 import { useFetch } from '@vueuse/core'
 import router from '@/router'
 
-const api_path = import.meta.env.VITE_API_PATH;
+const api_path = import.meta.env.VITE_API_PATH
 
 const user = useUserStore()
 
@@ -113,12 +113,9 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData)
 
-const { execute, isFetching, error, onFetchResponse, data } = useFetch(
-  `${api_path}/auth/signin`,
-  {
-    immediate: false
-  }
-)
+const { execute, isFetching, error, onFetchResponse, data } = useFetch(`${api_path}/auth/signin`, {
+  immediate: false
+})
   .post(formData)
   .json()
 

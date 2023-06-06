@@ -70,7 +70,7 @@ import router from '@/router'
 import { useRoute } from 'vue-router'
 import { useFetch } from '@vueuse/core'
 
-const api_path = import.meta.env.VITE_API_PATH;
+const api_path = import.meta.env.VITE_API_PATH
 
 const verification_token = useRoute().query.verificationToken
 

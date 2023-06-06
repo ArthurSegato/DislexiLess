@@ -132,8 +132,9 @@
           <div>
             <h1 class="text-5xl font-bold">DislexiLess</h1>
             <p class="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-              exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
+              Nós acreditamos que a tecnologia pode mudar o mundo, e é por esse motivo que
+              desenvolvemos a DislexiLess, uma plataforma criada para auxiliar profissionais da área
+              da saúde e da educação no suporte e acompanhamento de pessoas com dislexia.
             </p>
             <div class="flex gap-5 flex-wrap" v-if="!user.getAuth">
               <a href="#services" class="btn btn-outline btn-block sm:w-fit gap-2" tabindex="0"
@@ -209,11 +210,10 @@
         <div class="flex flex-col justify-center lg:w-1/2 gap-2 lg:gap-5">
           <h3 class="text-xl lg:text-2xl font-bold">Um app para os seus pacientes</h3>
           <p class="lg:text-lg leading-normal">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet delectus reiciendis sequi
-            hic provident, rerum possimus expedita nesciunt, quibusdam odit id ut pariatur veritatis
-            temporibus. Quos, fugit reiciendis sequi explicabo corporis eos obcaecati inventore
-            dicta, iusto, recusandae aliquam illo deleniti! Ex expedita vitae obcaecati illo dolor
-            tempora voluptates ea doloribus!
+            Completamente gratuido, o aplicativo da DislexiLess apresenta um conjunto de ferramentas
+            diárias cuidadosamente elaboradas para atender às necessidades específicas das pessoas
+            com dislexia, pensado nos minimos detalhes para o conforto e acessibilidade dos
+            usuários.
           </p>
         </div>
         <div class="flex justify-center lg:w-1/2">
@@ -230,11 +230,9 @@
         <div class="flex flex-col justify-center lg:w-1/2 gap-2 lg:gap-5">
           <h3 class="text-xl lg:text-2xl font-bold">Uma plataforma para você</h3>
           <p class="lg:text-lg leading-normal">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet delectus reiciendis sequi
-            hic provident, rerum possimus expedita nesciunt, quibusdam odit id ut pariatur veritatis
-            temporibus. Quos, fugit reiciendis sequi explicabo corporis eos obcaecati inventore
-            dicta, iusto, recusandae aliquam illo deleniti! Ex expedita vitae obcaecati illo dolor
-            tempora voluptates ea doloribus!
+            Tenha acesso em tempo real ao progresso dos seus pacientes, simplesmente cadastrando-os
+            na plataforma e inserindo o código gerado no aplicativo. A partir desse momento, você
+            estará pronto para desfrutar de todas as funcionalidades oferecidas pela plataforma.
           </p>
         </div>
         <div class="flex justify-center lg:w-1/2">
@@ -717,7 +715,9 @@
           <router-link :to="{ name: 'legal' }" tabindex="0"> Política de Privacidade </router-link>
         </li>
         <li>
-          <a href="https://github.com/ArthurSegato/DislexiLess" tabindex="0"> Contribua </a>
+          <a href="https://github.com/ArthurSegato/dislexiless-frontend" tabindex="0">
+            Contribua
+          </a>
         </li>
       </ul>
     </div>
@@ -735,7 +735,7 @@ import { vMaska } from 'maska'
 import { useFetch } from '@vueuse/core'
 import useVuelidate from '@vuelidate/core'
 
-const api_path = import.meta.env.VITE_API_PATH;
+const api_path = import.meta.env.VITE_API_PATH
 
 const user = useUserStore()
 

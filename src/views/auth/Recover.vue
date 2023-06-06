@@ -100,7 +100,7 @@ import { required, email } from '@vuelidate/validators'
 import { reactive, computed, ref } from 'vue'
 import { useFetch } from '@vueuse/core'
 
-const api_path = import.meta.env.VITE_API_PATH;
+const api_path = import.meta.env.VITE_API_PATH
 
 const send = ref(false)
 
@@ -116,12 +116,9 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData)
 
-const { execute, isFetching, error, onFetchResponse } = useFetch(
-  `${api_path}/auth/recover`,
-  {
-    immediate: false
-  }
-)
+const { execute, isFetching, error, onFetchResponse } = useFetch(`${api_path}/auth/recover`, {
+  immediate: false
+})
   .post(formData)
   .json()
 

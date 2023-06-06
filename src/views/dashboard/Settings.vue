@@ -2,9 +2,7 @@
   <DashboardHeader profile-pic="" />
   <DashboardMenu />
   <div class="flex flex-col items-center gap-10 w-full min-h-screen bg-base-200 py-28 px-5">
-    <div class="prose">
-      <h1>Configurações</h1>
-    </div>
+    <h1 class="text-3xl font-bold">Configurações</h1>
     <div class="card bg-base-100 shadow-xl lg:w-1/3">
       <div class="card-body">
         <h2 class="card-title">Perfil</h2>
@@ -175,7 +173,7 @@ import { required, email, minLength, helpers } from '@vuelidate/validators'
 import { vMaska } from 'maska'
 import { useFetch } from '@vueuse/core'
 
-const api_path = import.meta.env.VITE_API_PATH;
+const api_path = import.meta.env.VITE_API_PATH
 
 const user = useUserStore()
 const settings = useSettingsStore()

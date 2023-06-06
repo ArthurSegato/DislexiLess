@@ -2,9 +2,7 @@
   <DashboardHeader profile-pic="" />
   <DashboardMenu />
   <div class="flex flex-col items-center gap-5 w-full min-h-screen bg-base-200 py-28 px-5">
-    <div class="prose">
-      <h1>Pacientes</h1>
-    </div>
+    <h1 class="text-3xl font-bold">Pacientes</h1>
     <span class="navbar bg-base-100 shadow-md rounded-box sm:w-2/3" v-show="isFetching">
       <div class="flex-none h-12 w-20 bg-base-300 animate-pulse rounded-md"></div>
       <div class="divider divider-horizontal"></div>
@@ -442,7 +440,7 @@ import { computed, reactive, ref } from 'vue'
 import useVuelidate from '@vuelidate/core'
 import { email, required } from '@vuelidate/validators'
 
-const api_path = import.meta.env.VITE_API_PATH;
+const api_path = import.meta.env.VITE_API_PATH
 
 const user = useUserStore()
 
