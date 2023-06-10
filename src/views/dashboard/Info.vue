@@ -13,8 +13,20 @@
         </div>
         <div class="stats shadow w-full sm:w-fit">
           <div class="stat place-items-center">
-            <div class="stat-title">Pacientes Cadastrados</div>
-            <div class="stat-value">0</div>
+            <div class="stat-title">Acessos</div>
+            <div class="stat-value">{{ info.accessNumbers }}</div>
+          </div>
+        </div>
+        <div class="stats shadow w-full sm:w-fit">
+          <div class="stat place-items-center">
+            <div class="stat-title">Palavras Scaneadas</div>
+            <div class="stat-value">{{ info.wordsScanned }}</div>
+          </div>
+        </div>
+        <div class="stats shadow w-full sm:w-fit">
+          <div class="stat place-items-center">
+            <div class="stat-title">Palavras Lidas</div>
+            <div class="stat-value">{{ info.wordsRead }}</div>
           </div>
         </div>
       </div>
@@ -34,7 +46,10 @@ const api_path = import.meta.env.VITE_API_PATH
 const user = useUserStore()
 
 const info = ref({
-  numPatients: 0
+  numPatients: 0,
+  accessNumbers: 0,
+  wordsScanned: 0,
+  wordsRead: 0
 });
 
 const { onFetchResponse, data, onFetchError } = useFetch(
