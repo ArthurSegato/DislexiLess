@@ -10,10 +10,7 @@
       <div class="divider divider-horizontal"></div>
       <div class="flex-none justify-between h-12 w-20 bg-base-300 animate-pulse rounded-md"></div>
     </span>
-    <nav
-      class="navbar bg-base-100 shadow-md rounded-box sm:w-2/3 flex-nowrap flex-col"
-      v-for="patient in patients"
-    >
+    <nav class="navbar bg-base-100 shadow-md rounded-box sm:w-2/3 flex-nowrap flex-col" v-for="patient in patients">
       <div class="sm:hidden inline">
         <p>{{ patient['name'] }}</p>
       </div>
@@ -29,45 +26,26 @@
         <div class="divider divider-horizontal"></div>
         <div class="flex-1 flex justify-center sm:justify-between items-center">
           <p class="hidden sm:inline">{{ patient['name'] }}</p>
-          <button class="btn btn-ghost gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"
-              />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"
-              />
+          <router-link :to="{ name: 'info', query: { 
+            accessAmount: patient['accessAmount'],
+            wordsScanned: patient['wordsScanned'],
+            wordsRead: patient['wordsRead'] }}"
+            class="btn btn-ghost gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
             </svg>
             <p class="hidden lg:inline">Indicadores do Paciente</p>
-          </button>
+          </router-link>
         </div>
         <div class="divider divider-horizontal"></div>
         <div class="flex-none">
           <button class="btn btn-ghost gap-2" @click="showPatientInfo(patient)">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
-              />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
             </svg>
             <p class="hidden lg:inline">Informações do Paciente</p>
           </button>
@@ -76,42 +54,20 @@
     </nav>
     <nav class="navbar bg-base-100 shadow-md rounded-box justify-center sm:w-2/3">
       <button class="btn btn-ghost btn-block gap-2" @click="isRegisterModalOpen = true">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-5 h-5"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
-          />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
         </svg>
         <p>Cadastrar novo paciente</p>
       </button>
     </nav>
     <nav class="navbar bg-base-100 shadow-md rounded-box justify-center sm:w-2/3">
-      <a
-        href="https://buy.stripe.com/eVag0v19c8Tx0xO289"
-        class="btn btn-ghost btn-block gap-2"
-        tabindex="0"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-5 h-5"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
-          />
+      <a href="https://buy.stripe.com/eVag0v19c8Tx0xO289" class="btn btn-ghost btn-block gap-2" tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
         </svg>
         <p>Assinar mais vagas</p>
       </a>
@@ -119,13 +75,9 @@
   </div>
   <div
     class="flex w-full h-full min-h-screen bg-neutral/80 absolute top-0 left-0 z-50 justify-center items-start md:items-center"
-    v-show="isRegisterModalOpen"
-  >
-    <form
-      class="flex bg-neutral-100 w-full md:w-1/2 flex-col md:rounded-lg shadow-md px-10 py-2"
-      @submit.prevent="fetchRegister"
-      autocomplete="off"
-    >
+    v-show="isRegisterModalOpen">
+    <form class="flex bg-neutral-100 w-full md:w-1/2 flex-col md:rounded-lg shadow-md px-10 py-2"
+      @submit.prevent="fetchRegister" autocomplete="off">
       <h2 class="text-center text-2xl font-bold my-5">Cadastrar novo paciente</h2>
       <h3 class="font-bold text-lg">Informações Pessoais</h3>
       <div class="flex flex-row gap-x-5 flex-wrap md:flex-nowrap">
@@ -133,23 +85,15 @@
           <label class="label">
             <span class="label-text">Nome Completo</span>
           </label>
-          <input
-            type="text"
-            placeholder="João da Silva"
-            class="input input-bordered w-full"
-            v-model="registerFormData.name"
-          />
+          <input type="text" placeholder="João da Silva" class="input input-bordered w-full"
+            v-model="registerFormData.name" />
         </div>
         <div class="form-control w-full">
           <label class="label">
             <span class="label-text">CNS <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="text"
-            placeholder="123 4567 8910 1112"
-            class="input input-bordered w-full"
-            v-model="registerFormData.cns"
-          />
+          <input type="text" placeholder="123 4567 8910 1112" class="input input-bordered w-full"
+            v-model="registerFormData.cns" />
         </div>
       </div>
       <div class="flex flex-row gap-x-5 flex-wrap md:flex-nowrap">
@@ -157,23 +101,15 @@
           <label class="label">
             <span class="label-text">Data Nascimento</span>
           </label>
-          <input
-            type="date"
-            placeholder="2023-01-01"
-            class="input input-bordered w-full"
-            v-model="registerFormData.birthdate"
-          />
+          <input type="date" placeholder="2023-01-01" class="input input-bordered w-full"
+            v-model="registerFormData.birthdate" />
         </div>
         <div class="form-control w-full">
           <label class="label">
             <span class="label-text">Genero <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="text"
-            placeholder="Masculino"
-            class="input input-bordered w-full"
-            v-model="registerFormData.gender"
-          />
+          <input type="text" placeholder="Masculino" class="input input-bordered w-full"
+            v-model="registerFormData.gender" />
         </div>
       </div>
       <hr class="my-4" />
@@ -183,25 +119,15 @@
           <label class="label">
             <span class="label-text">Email <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="email"
-            placeholder="exemplo@email.com"
-            class="input input-bordered w-full"
-            v-model="registerFormData.email"
-          />
+          <input type="email" placeholder="exemplo@email.com" class="input input-bordered w-full"
+            v-model="registerFormData.email" />
         </div>
         <div class="form-control w-full">
           <label class="label">
             <span class="label-text">Telefone <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="tel"
-            placeholder="(01) 12345-6789"
-            class="input input-bordered w-full"
-            v-maska
-            data-maska="(##) #####-####"
-            v-model="registerFormData.phone"
-          />
+          <input type="tel" placeholder="(01) 12345-6789" class="input input-bordered w-full" v-maska
+            data-maska="(##) #####-####" v-model="registerFormData.phone" />
         </div>
       </div>
       <hr class="my-4" />
@@ -211,23 +137,15 @@
           <label class="label">
             <span class="label-text">Nome Completo <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="text"
-            placeholder="João da Silva"
-            class="input input-bordered w-full"
-            v-model="registerFormData.guardianName"
-          />
+          <input type="text" placeholder="João da Silva" class="input input-bordered w-full"
+            v-model="registerFormData.guardianName" />
         </div>
         <div class="form-control w-full">
           <label class="label">
             <span class="label-text">Parentesco <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="text"
-            placeholder="Pai"
-            class="input input-bordered w-full"
-            v-model="registerFormData.guardianKinship"
-          />
+          <input type="text" placeholder="Pai" class="input input-bordered w-full"
+            v-model="registerFormData.guardianKinship" />
         </div>
       </div>
       <div class="flex flex-row gap-x-5 flex-wrap md:flex-nowrap">
@@ -235,25 +153,15 @@
           <label class="label">
             <span class="label-text">Email <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="email"
-            placeholder="exemplo@email.com"
-            class="input input-bordered w-full"
-            v-model="registerFormData.guardianEmail"
-          />
+          <input type="email" placeholder="exemplo@email.com" class="input input-bordered w-full"
+            v-model="registerFormData.guardianEmail" />
         </div>
         <div class="form-control w-full">
           <label class="label">
             <span class="label-text">Telefone <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="tel"
-            placeholder="(01) 12345-6789"
-            class="input input-bordered w-full"
-            v-maska
-            data-maska="(##) #####-####"
-            v-model="registerFormData.guardianPhone"
-          />
+          <input type="tel" placeholder="(01) 12345-6789" class="input input-bordered w-full" v-maska
+            data-maska="(##) #####-####" v-model="registerFormData.guardianPhone" />
         </div>
       </div>
       <div class="my-4 justify-between w-full flex">
@@ -266,13 +174,9 @@
   </div>
   <div
     class="flex w-full h-full min-h-screen bg-neutral/80 absolute top-0 left-0 z-50 justify-center items-start md:items-center"
-    v-show="isInfoModalOpen"
-  >
-    <form
-      class="flex bg-neutral-100 w-full md:w-1/2 flex-col md:rounded-lg shadow-md px-10 py-2"
-      @submit.prevent
-      autocomplete="off"
-    >
+    v-show="isInfoModalOpen">
+    <form class="flex bg-neutral-100 w-full md:w-1/2 flex-col md:rounded-lg shadow-md px-10 py-2" @submit.prevent
+      autocomplete="off">
       <h2 class="text-center text-2xl font-bold my-5">Informações do Paciente</h2>
       <h3 class="font-bold text-lg">Informações Pessoais</h3>
       <div class="flex flex-row gap-x-5 flex-wrap md:flex-nowrap">
@@ -280,25 +184,15 @@
           <label class="label">
             <span class="label-text">Nome Completo</span>
           </label>
-          <input
-            type="text"
-            placeholder="João da Silva"
-            class="input input-bordered w-full"
-            v-model="updateFormData.name"
-            :disabled="!isInfoEditing"
-          />
+          <input type="text" placeholder="João da Silva" class="input input-bordered w-full" v-model="updateFormData.name"
+            :disabled="!isInfoEditing" />
         </div>
         <div class="form-control w-full">
           <label class="label">
             <span class="label-text">CNS <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="text"
-            placeholder="123 4567 8910 1112"
-            class="input input-bordered w-full"
-            v-model="updateFormData.cns"
-            :disabled="!isInfoEditing"
-          />
+          <input type="text" placeholder="123 4567 8910 1112" class="input input-bordered w-full"
+            v-model="updateFormData.cns" :disabled="!isInfoEditing" />
         </div>
       </div>
       <div class="flex flex-row gap-x-5 flex-wrap md:flex-nowrap">
@@ -306,25 +200,15 @@
           <label class="label">
             <span class="label-text">Data Nascimento</span>
           </label>
-          <input
-            type="date"
-            placeholder="2023-01-01"
-            class="input input-bordered w-full"
-            v-model="updateFormData.birthdate"
-            :disabled="!isInfoEditing"
-          />
+          <input type="date" placeholder="2023-01-01" class="input input-bordered w-full"
+            v-model="updateFormData.birthdate" :disabled="!isInfoEditing" />
         </div>
         <div class="form-control w-full">
           <label class="label">
             <span class="label-text">Genero <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="text"
-            placeholder="Masculino"
-            class="input input-bordered w-full"
-            v-model="updateFormData.gender"
-            :disabled="!isInfoEditing"
-          />
+          <input type="text" placeholder="Masculino" class="input input-bordered w-full" v-model="updateFormData.gender"
+            :disabled="!isInfoEditing" />
         </div>
       </div>
       <hr class="my-4" />
@@ -334,27 +218,15 @@
           <label class="label">
             <span class="label-text">Email <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="email"
-            placeholder="exemplo@email.com"
-            class="input input-bordered w-full"
-            v-model="updateFormData.email"
-            :disabled="!isInfoEditing"
-          />
+          <input type="email" placeholder="exemplo@email.com" class="input input-bordered w-full"
+            v-model="updateFormData.email" :disabled="!isInfoEditing" />
         </div>
         <div class="form-control w-full">
           <label class="label">
             <span class="label-text">Telefone <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="tel"
-            placeholder="(01) 12345-6789"
-            class="input input-bordered w-full"
-            v-maska
-            data-maska="(##) #####-####"
-            v-model="updateFormData.phone"
-            :disabled="!isInfoEditing"
-          />
+          <input type="tel" placeholder="(01) 12345-6789" class="input input-bordered w-full" v-maska
+            data-maska="(##) #####-####" v-model="updateFormData.phone" :disabled="!isInfoEditing" />
         </div>
       </div>
       <hr class="my-4" />
@@ -364,25 +236,15 @@
           <label class="label">
             <span class="label-text">Nome Completo <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="text"
-            placeholder="João da Silva"
-            class="input input-bordered w-full"
-            v-model="updateFormData.guardianName"
-            :disabled="!isInfoEditing"
-          />
+          <input type="text" placeholder="João da Silva" class="input input-bordered w-full"
+            v-model="updateFormData.guardianName" :disabled="!isInfoEditing" />
         </div>
         <div class="form-control w-full">
           <label class="label">
             <span class="label-text">Parentesco <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="text"
-            placeholder="Pai"
-            class="input input-bordered w-full"
-            v-model="updateFormData.guardianKinship"
-            :disabled="!isInfoEditing"
-          />
+          <input type="text" placeholder="Pai" class="input input-bordered w-full"
+            v-model="updateFormData.guardianKinship" :disabled="!isInfoEditing" />
         </div>
       </div>
       <div class="flex flex-row gap-x-5 flex-wrap md:flex-nowrap">
@@ -390,27 +252,15 @@
           <label class="label">
             <span class="label-text">Email <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="email"
-            placeholder="exemplo@email.com"
-            class="input input-bordered w-full"
-            v-model="updateFormData.guardianEmail"
-            :disabled="!isInfoEditing"
-          />
+          <input type="email" placeholder="exemplo@email.com" class="input input-bordered w-full"
+            v-model="updateFormData.guardianEmail" :disabled="!isInfoEditing" />
         </div>
         <div class="form-control w-full">
           <label class="label">
             <span class="label-text">Telefone <sup>(Opcional)</sup></span>
           </label>
-          <input
-            type="tel"
-            placeholder="(01) 12345-6789"
-            class="input input-bordered w-full"
-            v-maska
-            data-maska="(##) #####-####"
-            v-model="updateFormData.guardianPhone"
-            :disabled="!isInfoEditing"
-          />
+          <input type="tel" placeholder="(01) 12345-6789" class="input input-bordered w-full" v-maska
+            data-maska="(##) #####-####" v-model="updateFormData.guardianPhone" :disabled="!isInfoEditing" />
         </div>
       </div>
       <div class="my-4 justify-between w-full flex" v-if="!isInfoEditing">

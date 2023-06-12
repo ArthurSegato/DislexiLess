@@ -11,22 +11,22 @@
             <div class="stat-value">{{ info.numPatients }}</div>
           </div>
         </div>
-        <div class="stats shadow w-full sm:w-fit">
+        <div class="stats shadow w-full sm:w-fit" v-show="accessAmount != null">
           <div class="stat place-items-center">
             <div class="stat-title">Acessos</div>
-            <div class="stat-value">{{ info.accessNumbers }}</div>
+            <div class="stat-value">{{ accessAmount }}</div>
           </div>
         </div>
-        <div class="stats shadow w-full sm:w-fit">
+        <div class="stats shadow w-full sm:w-fit" v-show="wordsScanned != null">
           <div class="stat place-items-center">
             <div class="stat-title">Palavras Scaneadas</div>
-            <div class="stat-value">{{ info.wordsScanned }}</div>
+            <div class="stat-value">{{ wordsScanned }}</div>
           </div>
         </div>
-        <div class="stats shadow w-full sm:w-fit">
+        <div class="stats shadow w-full sm:w-fit" v-show="wordsRead != null">
           <div class="stat place-items-center">
             <div class="stat-title">Palavras Lidas</div>
-            <div class="stat-value">{{ info.wordsRead }}</div>
+            <div class="stat-value">{{ wordsRead }}</div>
           </div>
         </div>
       </div>
@@ -40,17 +40,19 @@ import DashboardMenu from '@/components/dashboard/DashboardMenu.vue'
 import { useUserStore } from '@/stores/user';
 import { useFetch } from '@vueuse/core';
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 const api_path = import.meta.env.VITE_API_PATH
 
 const user = useUserStore()
 
 const info = ref({
-  numPatients: 0,
-  accessNumbers: 0,
-  wordsScanned: 0,
-  wordsRead: 0
+  numPatients: 0
 });
+
+const accessAmount = useRoute().query.accessAmount
+const wordsScanned = useRoute().query.wordsScanned
+const wordsRead = useRoute().query.wordsRead
 
 const { onFetchResponse, data, onFetchError } = useFetch(
   `${api_path}/patients`,
