@@ -3,7 +3,7 @@
 
 DislexiLess is a solution composed of a web platform (Vue 3/Nest.js) and a mobile application (Flutter) that aims to facilitate the reading process for people with dyslexia and assist healthcare and education professionals in the treatment of individuals with dyslexia.
 
-This tool was developed over a period of 4 months for my Computer Science thesis at Universidade Vila Velha. I was responsible for the development of the web platform, while [Eduardo](https://github.com/OmptOsu) was responsible for the mobile application. The full thesis can be found [here](/DISLEXILESS_TCC-2_ARTHUR_EDUARDO.pdf).
+This tool was developed over a period of 4 months for my Computer Science thesis at Universidade Vila Velha. I was responsible for the development of the web platform, while [Eduardo](https://github.com/OmptOsu) was responsible for the mobile application. The full thesis can be found [here](.github/assets/DISLEXILESS_TCC-2_ARTHUR_EDUARDO.pdf).
 
 ## Requirements
 
