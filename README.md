@@ -1,46 +1,76 @@
-# dislexiless-front
+![DislexiLess screenshot](.github/assets/banner.png)
+<a href="https://donate.stripe.com/7sI29F4lo7Pt80g28a"><img src="https://img.shields.io/badge/Donate-Stripe-ff4757"></a>
 
-This template should help get you started developing with Vue 3 in Vite.
+DislexiLess is a solution composed of a web platform (Vue 3/Nest.js) and a mobile application (Flutter) that aims to facilitate the reading process for people with dyslexia and assist healthcare and education professionals in the treatment of individuals with dyslexia.
 
-## Recommended IDE Setup
+This tool was developed over a period of 4 months for my Computer Science thesis at Universidade Vila Velha. I was responsible for the development of the web platform, while [Eduardo](https://github.com/OmptOsu) was responsible for the mobile application. The full thesis can be found [here](/DISLEXILESS_TCC-2_ARTHUR_EDUARDO.pdf).
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Requirements
 
-## Type Support for `.vue` Imports in TS
+- Bun v1.0.21 and above **OR** Node v21.2.0 and above
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## Setup
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+Make sure to install the dependencies:
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
+# npm
 npm install
+
+# pnpm
+pnpm install
+
+# yarn
+yarn install
+
+# bun
+bun install
 ```
 
-### Compile and Hot-Reload for Development
+## Development
 
-```sh
+Start the development server on `http://localhost:3000`:
+
+```bash
+# npm
 npm run dev
+
+# pnpm
+pnpm run dev
+
+# yarn
+yarn dev
+
+# bun
+bun dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## Production
 
-```sh
+Build the application for production:
+
+```bash
+# npm
 npm run build
+
+# pnpm
+pnpm run build
+
+# yarn
+yarn build
+
+# bun
+bun run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Disclaimer
 
-```sh
-npm run lint
-```
+Below is a list of all the external assets used in the development of this website with their respective licenses.
+
+- [BootStrapp Icons](https://icons.getbootstrap.com) ([MIT](https://github.com/twbs/icons/blob/main/LICENSE.md))
+- [daisyUI](https://daisyui.com/) ([MIT](https://github.com/saadeghi/daisyui/blob/master/LICENSE))
+
+## Contributors
+
+- [@ArthurSegato](https://github.com/ArthurSegato)
+- [@OmptOsu](https://github.com/OmptOsu)
