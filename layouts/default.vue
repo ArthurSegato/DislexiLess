@@ -3,6 +3,9 @@ const isNavOpen = ref(false);
 </script>
 
 <template>
+    <div
+        class="w-full fixed h-3 bg-red-600 sm:bg-orange-600 md:bg-yellow-600 lg:bg-green-600 xl:bg-blue-600 2xl:bg-purple-600">
+    </div>
     <div class="w-100 min-h-screen">
         <header class="p-4 flex flex-col fixed w-full z-20 items-end">
             <nav class="navbar bg-base-100 rounded-box shadow-xl bg-opacity-50 backdrop-blur-2xl backdrop-saturate-200">
@@ -23,7 +26,7 @@ const isNavOpen = ref(false);
                             <NuxtLink to="#about">About</NuxtLink>
                         </li>
                         <li>
-                            <NuxtLink to="#prices">Prices</NuxtLink>
+                            <NuxtLink to="#pricing">Pricing</NuxtLink>
                         </li>
                         <li>
                             <NuxtLink to="#contact">Contact</NuxtLink>
@@ -58,7 +61,7 @@ const isNavOpen = ref(false);
                     <NuxtLink to="#about">About</NuxtLink>
                 </li>
                 <li>
-                    <NuxtLink to="#prices">Prices</NuxtLink>
+                    <NuxtLink to="#pricing">Pricing</NuxtLink>
                 </li>
                 <li>
                     <NuxtLink to="#contact">Contact</NuxtLink>
@@ -70,12 +73,12 @@ const isNavOpen = ref(false);
             </ul>
         </header>
         <slot />
-        <footer class="footer p-10 bg-base-200 text-base-content place-items-center items-start">
+        <footer class="footer flex p-10 bg-base-200 justify-evenly">
             <nav>
                 <header class="footer-title">Company</header>
                 <NuxtLink to="#services" class="link link-hover">Services</NuxtLink>
                 <NuxtLink to="#about" class="link link-hover">About us</NuxtLink>
-                <NuxtLink to="#prices" class="link link-hover">Prices</NuxtLink>
+                <NuxtLink to="#pricing" class="link link-hover">Pricing</NuxtLink>
                 <NuxtLink to="#contact" class="link link-hover">Contact</NuxtLink>
                 <NuxtLink to="/press" class="link link-hover">Press kit</NuxtLink>
             </nav>

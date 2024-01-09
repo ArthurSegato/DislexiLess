@@ -2,4 +2,5 @@
     <TheHero />
     <LazyTheServices />
     <LazyTheAbout />
+    <LazyThePricing />
 </template>

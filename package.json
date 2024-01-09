@@ -5,7 +5,7 @@
   "scripts": {
     "clear": "nuxi cleanup | nuxi prepare",
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -16,5 +16,8 @@
     "nuxt": "^3.9.0",
     "vue": "^3.4.5",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@nuxt/image": "^1.1.0"
   }
 }
