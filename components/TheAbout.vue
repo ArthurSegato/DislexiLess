@@ -19,20 +19,18 @@
                     <div class="card-actions justify-end">
                         <NuxtLink to="https://github.com/ArthurSegato" class="btn btn-primary btn-outline gap-2">
                             Github
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8.6 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.9a.5.5 0 0 0-1 0v6.6a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.6a.5.5 0 0 0 .5-.5" />
-                                <path fill-rule="evenodd"
-                                    d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.8L6 9.1a.5.5 0 1 0 .8.8L15 1.7v3.8a.5.5 0 0 0 1 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
+                                class="w-5 h-5 fill-none stroke-current" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M13.5 6H5.2A2.3 2.3 0 0 0 3 8.3v10.4A2.3 2.3 0 0 0 5.3 21h10.4a2.3 2.3 0 0 0 2.3-2.3v-8.2m-10.5 6L21 3m0 0h-5.3M21 3v5.3" />
                             </svg>
                         </NuxtLink>
                         <NuxtLink to="https://www.arthursegato.dev/" class="btn btn-primary btn-outline gap-2">
                             Portfolio
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8.6 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.9a.5.5 0 0 0-1 0v6.6a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.6a.5.5 0 0 0 .5-.5" />
-                                <path fill-rule="evenodd"
-                                    d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.8L6 9.1a.5.5 0 1 0 .8.8L15 1.7v3.8a.5.5 0 0 0 1 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
+                                class="w-5 h-5 fill-none stroke-current" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M13.5 6H5.2A2.3 2.3 0 0 0 3 8.3v10.4A2.3 2.3 0 0 0 5.3 21h10.4a2.3 2.3 0 0 0 2.3-2.3v-8.2m-10.5 6L21 3m0 0h-5.3M21 3v5.3" />
                             </svg>
                         </NuxtLink>
                     </div>
@@ -51,11 +49,10 @@
                     <div class="card-actions justify-end">
                         <NuxtLink to="https://github.com/OmptOsu" class="btn btn-primary btn-outline gap-2" tabindex="0">
                             Github
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8.6 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.9a.5.5 0 0 0-1 0v6.6a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.6a.5.5 0 0 0 .5-.5" />
-                                <path fill-rule="evenodd"
-                                    d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.8L6 9.1a.5.5 0 1 0 .8.8L15 1.7v3.8a.5.5 0 0 0 1 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
+                                class="w-5 h-5 fill-none stroke-current" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M13.5 6H5.2A2.3 2.3 0 0 0 3 8.3v10.4A2.3 2.3 0 0 0 5.3 21h10.4a2.3 2.3 0 0 0 2.3-2.3v-8.2m-10.5 6L21 3m0 0h-5.3M21 3v5.3" />
                             </svg>
                         </NuxtLink>
                     </div>
@@ -79,11 +76,10 @@
                         <NuxtLink to="https://www.instagram.com/dr.ramon.ferraz/" class="btn btn-primary btn-outline gap-2"
                             tabindex="0">
                             Instagram
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8.6 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.9a.5.5 0 0 0-1 0v6.6a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.6a.5.5 0 0 0 .5-.5" />
-                                <path fill-rule="evenodd"
-                                    d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.8L6 9.1a.5.5 0 1 0 .8.8L15 1.7v3.8a.5.5 0 0 0 1 0z" />
+                            <svg xmlns="http://www.w=" stroke-width="1.5" class="w-5 h-5 fill-none stroke-current"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M13.5 6H5.2A2.3 2.3 0 0 0 3 8.3v10.4A2.3 2.3 0 0 0 5.3 21h10.4a2.3 2.3 0 0 0 2.3-2.3v-8.2m-10.5 6L21 3m0 0h-5.3M21 3v5.3" />
                             </svg>
                         </NuxtLink>
                     </div>

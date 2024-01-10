@@ -3,4 +3,5 @@
     <LazyTheServices />
     <LazyTheAbout />
     <LazyThePricing />
+    <LazyTheContact />
 </template>

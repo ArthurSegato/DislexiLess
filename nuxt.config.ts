@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   nitro: {
     preset: "vercel-edge",
   },
+  runtimeConfig: {
+    contactWebhook: "",
+  },
   image: {
     format: ["avif", "webp"],
   },
