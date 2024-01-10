@@ -56,7 +56,7 @@ const contactHandler = async () => {
 
 <template>
     <section id="contact"
-        class="flex flex-col items-center bg-base-200 gap-12 lg:gap-20 py-24 px-10 sm:px-20 md:px-32 overflow-x-hidden">
+        class="flex flex-col items-center bg-base-200 gap-12 lg:gap-20 px-4 sm:px-12 md:px-16 xl:px-20 overflow-x-hidden">
         <SectionHeader title="Contact" subtitle="Let's talk" />
         <div class="card w-full sm:w-96 bg-base-100 shadow-xl">
             <div class="card-body">

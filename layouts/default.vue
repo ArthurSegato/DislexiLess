@@ -3,10 +3,7 @@ const isNavOpen = ref(false);
 </script>
 
 <template>
-    <div
-        class="w-full fixed h-3 bg-red-600 sm:bg-orange-600 md:bg-yellow-600 lg:bg-green-600 xl:bg-blue-600 2xl:bg-purple-600">
-    </div>
-    <div class="w-100 min-h-screen">
+    <div class="w-full min-h-screen">
         <header class="p-4 flex flex-col fixed w-full z-20 items-end">
             <nav class="navbar bg-base-100 rounded-box shadow-xl bg-opacity-50 backdrop-blur-2xl backdrop-saturate-200">
                 <div class="w-full">
@@ -20,16 +17,16 @@ const isNavOpen = ref(false);
                 <div class="hidden lg:flex w-full">
                     <ul class="menu menu-horizontal px-1 w-full">
                         <li>
-                            <NuxtLink to="#services">Services</NuxtLink>
+                            <NuxtLink to="/#services">Services</NuxtLink>
                         </li>
                         <li>
-                            <NuxtLink to="#about">About</NuxtLink>
+                            <NuxtLink to="/#about">About</NuxtLink>
                         </li>
                         <li>
-                            <NuxtLink to="#pricing">Pricing</NuxtLink>
+                            <NuxtLink to="/#pricing">Pricing</NuxtLink>
                         </li>
                         <li>
-                            <NuxtLink to="#contact">Contact</NuxtLink>
+                            <NuxtLink to="/#contact">Contact</NuxtLink>
                         </li>
                     </ul>
                 </div>
@@ -55,16 +52,16 @@ const isNavOpen = ref(false);
             <ul tabindex="0" v-show="isNavOpen"
                 class="menu  dropdown-content mt-3 z-[1] p-2 shadow-xl bg-base-100 rounded-box w-52 bg-opacity-50 backdrop-blur-2xl backdrop-saturate-200">
                 <li>
-                    <NuxtLink to="#services">Services</NuxtLink>
+                    <NuxtLink to="/#services">Services</NuxtLink>
                 </li>
                 <li>
-                    <NuxtLink to="#about">About</NuxtLink>
+                    <NuxtLink to="/#about">About</NuxtLink>
                 </li>
                 <li>
-                    <NuxtLink to="#pricing">Pricing</NuxtLink>
+                    <NuxtLink to="/#pricing">Pricing</NuxtLink>
                 </li>
                 <li>
-                    <NuxtLink to="#contact">Contact</NuxtLink>
+                    <NuxtLink to="/#contact">Contact</NuxtLink>
                 </li>
                 <li class="gap-2">
                     <NuxtLink to="/auth" class="btn content-center" tabindex="0">Sign In</NuxtLink>
@@ -76,16 +73,16 @@ const isNavOpen = ref(false);
         <footer class="footer flex p-10 bg-base-200 justify-evenly">
             <nav>
                 <header class="footer-title">Company</header>
-                <NuxtLink to="#services" class="link link-hover">Services</NuxtLink>
-                <NuxtLink to="#about" class="link link-hover">About us</NuxtLink>
-                <NuxtLink to="#pricing" class="link link-hover">Pricing</NuxtLink>
-                <NuxtLink to="#contact" class="link link-hover">Contact</NuxtLink>
+                <NuxtLink to="/#services" class="link link-hover">Services</NuxtLink>
+                <NuxtLink to="/#about" class="link link-hover">About us</NuxtLink>
+                <NuxtLink to="/#pricing" class="link link-hover">Pricing</NuxtLink>
+                <NuxtLink to="/#contact" class="link link-hover">Contact</NuxtLink>
                 <NuxtLink to="/press" class="link link-hover">Press kit</NuxtLink>
             </nav>
             <nav>
                 <header class="footer-title">Legal</header>
                 <NuxtLink to="/legal" class="link link-hover">Terms of use</NuxtLink>
-                <NuxtLink to="/legal" class="link link-hover">Privacy policy</NuxtLink>
+                <NuxtLink to="/legal#divider" class="link link-hover">Privacy policy</NuxtLink>
             </nav>
         </footer>
         <footer class="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300 place-items-center">
