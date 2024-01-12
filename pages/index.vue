@@ -1,7 +1,9 @@
 <template>
-    <TheHero />
-    <LazyTheServices />
-    <LazyTheAbout />
-    <LazyThePricing />
-    <LazyTheContact />
+    <NuxtLayout name="default">
+        <TheHero />
+        <LazyTheServices />
+        <LazyTheAbout />
+        <LazyThePricing />
+        <LazyTheContact />
+    </NuxtLayout>
 </template>
