@@ -3,11 +3,8 @@ const layoutProps = useAttrs()
 </script>
 
 <template>
-    <div
-        class="w-full fixed h-3 bg-red-600 sm:bg-orange-600 md:bg-yellow-600 lg:bg-green-600 xl:bg-blue-600 2xl:bg-purple-600">
-    </div>
-    <div class="w-full h-screen flex flex-row">
-        <div class="relative w-full h-full hidden md:inline">
+    <div class="w-full min-h-screen h-screen flex flex-row">
+        <div class="relative w-full h-full hidden lg:inline">
             <NuxtImg :src="layoutProps.imgSrc" class="select-none w-full h-full object-cover" placeholder loading="eager"
                 :alt="layoutProps.imgAlt" :title="layoutProps.imgAlt" />
             <div class="p-4 absolute bottom-0 w-full z-20">
@@ -22,9 +19,9 @@ const layoutProps = useAttrs()
                 </div>
             </div>
         </div>
-        <div class="w-full h-full flex flex-col">
+        <div class="w-full lg:h-full grow flex flex-col">
             <header class="p-4 w-full">
-                <span @click="$router.back()" tabindex="0" class=" flex align-middle gap-2 group w-fit cursor-pointer">
+                <NuxtLink to="/" class=" flex align-middle gap-2 group w-fit">
                     <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" class="w-6 h-6 fill-none stroke-current"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.8 19.5 8.2 12l7.6-7.5" />
@@ -32,9 +29,9 @@ const layoutProps = useAttrs()
                     <p
                         class="group-hover:-translate-x-1 group-focus-within:-translate-x-1 transition-all ease-in-out duration-300">
                         Return</p>
-                </span>
+                </NuxtLink>
             </header>
-            <main class="w-full h-full flex flex-col items-center justify-center p-4 sm:px-12 md:px-16 xl:px-20">
+            <main class="w-full grow flex flex-col items-center justify-center p-4 sm:px-12 md:px-16 xl:px-20">
                 <slot />
             </main>
             <footer class="p-4 w-full text-center">

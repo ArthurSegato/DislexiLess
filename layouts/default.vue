@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { status } = useAuth()
 const isNavOpen = ref(false);
 </script>
 
@@ -31,7 +32,10 @@ const isNavOpen = ref(false);
                     </ul>
                 </div>
                 <div class="w-full justify-end">
-                    <div class="join hidden lg:inline">
+                    <NuxtLink to="/dashboard" class="btn btn-primary" tabindex="0" v-if="status === 'authenticated'">
+                        Access the dashboard
+                    </NuxtLink>
+                    <div class="join hidden lg:inline" v-else>
                         <NuxtLink to="/auth" class="btn join-item" tabindex="0">Sign In</NuxtLink>
                         <NuxtLink to="/auth/register" class="btn btn-primary join-item" tabindex="0">Register</NuxtLink>
                     </div>

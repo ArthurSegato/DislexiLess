@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { signIn } = useAuth()
+
 const passwordType = ref("password");
 
 const signInFail = ref(false);
@@ -51,6 +53,7 @@ const togglePassword = async () => passwordType.value = passwordType.value === "
         unsplashSrc="https://unsplash.com/photos/XMCLLGGMMYU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
         footerText="Don't have an account?" footerLinkSrc="/auth/register" footerLinkText="Create a new one">
         <h1 class="text-4xl font-thin py-8 w-full text-center">Sign In to your account</h1>
+        <button @click="signIn(`github`)" class="btn">Github</button>
         <form @submit.prevent="formHandler" class="flex flex-col w-full items-center" autocomplete="off">
             <div class="form-control w-full max-w-sm">
                 <label class="label">

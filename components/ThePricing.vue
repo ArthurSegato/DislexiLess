@@ -1,6 +1,10 @@
+<script setup lang="ts">
+const { status } = useAuth();
+</script>
+
 <template>
     <section id="pricing"
-        class="flex flex-col items-center gap-12 lg:gap-20 px-4 sm:px-12 md:px-16 xl:px-20 overflow-x-hidden">
+        class="flex flex-col items-center gap-12 lg:gap-20 py-24 px-4 sm:px-12 md:px-16 xl:px-20 overflow-x-hidden">
         <SectionHeader title="Pricing" subtitle="No plans, No nothing" />
         <div
             class="relative flex w-full max-w-[20rem] flex-col rounded-xl bg-primary bg-clip-border p-8 text-primary-content shadow-md shadow-primary/40 ease-in-out duration-200 hover:scale-105">
@@ -44,9 +48,13 @@
                 </ul>
             </div>
             <div class="mt-12 p-0">
-                <NuxtLink to="/auth/register" class="btn btn-block" tabindex="0">
+                <NuxtLink to="/dashboard" class="btn btn-block" tabindex="0" v-if="status === 'authenticated'">
+                    Access the dashboard
+                </NuxtLink>
+                <NuxtLink to="/auth/register" class="btn btn-block" tabindex="0" v-else>
                     Register now
                 </NuxtLink>
+
             </div>
         </div>
     </section>

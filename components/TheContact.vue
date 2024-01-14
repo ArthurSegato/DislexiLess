@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const alert = ref({
+const states = ref({
+    fetching: false,
     success: false,
     fail: false,
 })
@@ -24,6 +25,8 @@ watch(() => [contactForm.name, contactForm.email, contactForm.message],
 
 const contactHandler = async () => {
     try {
+        states.value.fetching = true;
+
         const request = await $fetch('/api/contact', {
             method: 'POST',
             body: {
@@ -35,7 +38,8 @@ const contactHandler = async () => {
             }
         })
 
-        alert.value.success = true;
+        states.value.fetching = false;
+        states.value.success = true;
 
         setTimeout(async () => {
             contactForm.name = ''
@@ -43,12 +47,13 @@ const contactHandler = async () => {
             contactForm.email = ''
             contactForm.message = ''
             contactForm.isValid = false
-            alert.value.success = false
+            states.value.success = false
         }, 3000);
     }
     catch (error) {
-        alert.value.fail = true;
-        setTimeout(async () => alert.value.fail = false, 5000);
+        states.value.fetching = false;
+        states.value.fail = true;
+        setTimeout(async () => states.value.fail = false, 5000);
     }
 }
 </script>
@@ -170,21 +175,23 @@ const contactHandler = async () => {
                             v-model="contactForm.message"></textarea>
                     </div>
                     <div class="flex justify-end my-2">
-                        <button type="submit" class="btn btn-primary gap-2 w-full md:w-32 group"
-                            :disabled="!contactForm.isValid">
-                            Send
-                            <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
-                                class="w-5 h-5 fill-none stroke-current group-hover:translate-x-1 group-focus-within:translate-x-1 transition-all ease-in-out duration-300"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M6 12 3.3 3.1A59.8 59.8 0 0 1 21.5 12a59.8 59.8 0 0 1-18.2 8.9L6 12Zm0 0h7.5" />
-                            </svg>
+                        <button type="submit" class="btn btn-primary w-full md:w-32 group" :disabled="!contactForm.isValid">
+                            <span class="loading loading-spinner loading-xs" v-if="states.fetching"></span>
+                            <span class="flex gap-2 items-center" v-else>
+                                Send
+                                <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
+                                    class="w-5 h-5 fill-none stroke-current group-hover:translate-x-1 group-focus-within:translate-x-1 transition-all ease-in-out duration-300"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M6 12 3.3 3.1A59.8 59.8 0 0 1 21.5 12a59.8 59.8 0 0 1-18.2 8.9L6 12Zm0 0h7.5" />
+                                </svg>
+                            </span>
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="p-4 fixed w-full z-10 bottom-0 transition-all ease-in-out duration-300" v-show="alert.success">
+        <div class="p-4 fixed w-full z-10 bottom-0 transition-all ease-in-out duration-300" v-show="states.success">
             <div role="alert" class="alert alert-success flex">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 fill-none"
                     viewBox="0 0 24 24">
@@ -194,7 +201,7 @@ const contactHandler = async () => {
                 <span>We got your message!</span>
             </div>
         </div>
-        <div class="p-4 fixed w-full z-10 bottom-0 transition-all ease-in-out duration-300" v-show="alert.fail">
+        <div class="p-4 fixed w-full z-10 bottom-0 transition-all ease-in-out duration-300" v-show="states.fail">
             <div role="alert" class="alert alert-error flex">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 fill-none"
                     viewBox="0 0 24 24">
