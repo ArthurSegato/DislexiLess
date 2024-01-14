@@ -21,7 +21,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.3 12 15.7 4.5 8.3" />
                         </svg>
                     </a>
-                    <NuxtLink to="/auth/signup" class="btn btn-primary sm:w-fit gap-2 group" tabindex="0">
+                    <NuxtLink to="/auth" class="btn btn-primary sm:w-fit gap-2 group" tabindex="0">
                         Get started
                         <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
                             class="group-hover:translate-x-1 group-focus-within:translate-x-1 transition-all ease-in-out duration-300 w-5 h-5 fill-none stroke-current"

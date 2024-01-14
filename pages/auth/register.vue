@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ middleware: "guest-only" });
+
 const passwordType = ref("password");
 
 const states = ref({

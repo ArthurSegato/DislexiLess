@@ -32,12 +32,14 @@ const isNavOpen = ref(false);
                     </ul>
                 </div>
                 <div class="w-full justify-end">
-                    <NuxtLink to="/dashboard" class="btn btn-primary" tabindex="0" v-if="status === 'authenticated'">
-                        Access the dashboard
-                    </NuxtLink>
-                    <div class="join hidden lg:inline" v-else>
-                        <NuxtLink to="/auth" class="btn join-item" tabindex="0">Sign In</NuxtLink>
-                        <NuxtLink to="/auth/register" class="btn btn-primary join-item" tabindex="0">Register</NuxtLink>
+                    <div class="hidden lg:inline">
+                        <NuxtLink to="/dashboard" class="btn btn-primarye" tabindex="0" v-if="status === 'authenticated'">
+                            Access the dashboard
+                        </NuxtLink>
+                        <div class="join" v-else>
+                            <NuxtLink to="/auth" class="btn join-item" tabindex="0">Sign In</NuxtLink>
+                            <NuxtLink to="/auth/register" class="btn btn-primary join-item" tabindex="0">Register</NuxtLink>
+                        </div>
                     </div>
                     <label role="button" tabindex="0" class="btn btn-ghost lg:hidden swap swap-rotate">
                         <input type="checkbox" v-model="isNavOpen" />
@@ -67,9 +69,16 @@ const isNavOpen = ref(false);
                 <li>
                     <NuxtLink to="/#contact">Contact</NuxtLink>
                 </li>
-                <li class="gap-2">
-                    <NuxtLink to="/auth" class="btn content-center" tabindex="0">Sign In</NuxtLink>
-                    <NuxtLink to="/auth/register" class="btn btn-primary content-center" tabindex="0">Register</NuxtLink>
+                <li class="py-1">
+                    <NuxtLink to="/dashboard" class="btn btn-primary content-center" tabindex="0"
+                        v-if="status === 'authenticated'">
+                        Access the dashboard
+                    </NuxtLink>
+                    <div class="gap-2 flex flex-col w-full" v-else>
+                        <NuxtLink to="/auth" class="btn content-center w-full" tabindex="0">Sign In</NuxtLink>
+                        <NuxtLink to="/auth/register" class="btn btn-primary content-center w-full" tabindex="0">Register
+                        </NuxtLink>
+                    </div>
                 </li>
             </ul>
         </header>
