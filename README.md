@@ -1,6 +1,13 @@
-# Nuxt 3 Minimal Starter
+![DislexiLess screenshot](.github/assets/banner.png)
+<a href="https://donate.stripe.com/7sI29F4lo7Pt80g28a"><img src="https://img.shields.io/badge/Donate-Stripe-ff4757"/></a>
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+DislexiLess is a solution composed of a web platform (Vue 3/Nest.js) and a mobile application (Flutter) that aims to facilitate the reading process for people with dyslexia and assist healthcare and education professionals in the treatment of individuals with dyslexia.
+
+This tool was developed over a period of 4 months for my Computer Science thesis at Universidade Vila Velha. I was responsible for the development of the web platform, while [Eduardo](https://github.com/OmptOsu) was responsible for the mobile application. The full thesis can be found [here](.github/assets/DISLEXILESS_TCC-2_ARTHUR_EDUARDO.pdf).
+
+## Requirements
+
+- Bun v1.0.22 and above **OR** Node v21.2.0 and above
 
 ## Setup
 
@@ -20,7 +27,7 @@ yarn install
 bun install
 ```
 
-## Development Server
+## Development
 
 Start the development server on `http://localhost:3000`:
 
@@ -35,7 +42,7 @@ pnpm run dev
 yarn dev
 
 # bun
-bun run dev
+bun dev
 ```
 
 ## Production
@@ -56,20 +63,15 @@ yarn build
 bun run build
 ```
 
-Locally preview production build:
+## Disclaimer
 
-```bash
-# npm
-npm run preview
+Below is a list of all the external assets used in the development of this website with their respective licenses.
 
-# pnpm
-pnpm run preview
+- [BootStrapp Icons](https://icons.getbootstrap.com) ([MIT](https://github.com/twbs/icons/blob/main/LICENSE.md))
+- [Hero Icons](https://heroicons.com/) ([MIT](https://github.com/tailwindlabs/heroicons/blob/master/LICENSE))
+- [daisyUI](https://daisyui.com/) ([MIT](https://github.com/saadeghi/daisyui/blob/master/LICENSE))
 
-# yarn
-yarn preview
+## Contributors
 
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- [@ArthurSegato](https://github.com/ArthurSegato)
+- [@OmptOsu](https://github.com/OmptOsu)
