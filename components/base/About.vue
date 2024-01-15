@@ -1,7 +1,7 @@
 <template>
     <section id="about"
         class="flex flex-col items-center gap-12 lg:gap-20 py-24 px-4 sm:px-12 md:px-16 xl:px-20 bg-primary text-primary-content overflow-x-hidden">
-        <LazySectionHeader title="About us" subtitle="The humans behind all" />
+        <LazyBaseHeader title="About us" sub-title="The humans behind all" />
         <div class="flex sm:gap-6 md:gap-10 gap-16 lg:gap-24 flex-wrap w-full justify-evenly">
             <div class="card w-full lg:w-96 bg-base-100 shadow-xl text-base-content">
                 <figure>

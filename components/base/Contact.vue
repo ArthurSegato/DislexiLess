@@ -61,7 +61,7 @@ const contactHandler = async () => {
 <template>
     <section id="contact"
         class="flex flex-col items-center bg-base-200 gap-12 lg:gap-20 py-24 px-4 sm:px-12 md:px-16 xl:px-20 overflow-x-hidden">
-        <SectionHeader title="Contact" subtitle="Let's talk" />
+        <LazyBaseHeader title="Contact" sub-title="Let's talk" />
         <div class="card w-full sm:w-96 bg-base-100 shadow-xl">
             <div class="card-body">
                 <h3 class="text-xl text-center">On social media</h3>

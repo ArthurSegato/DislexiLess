@@ -1,7 +1,7 @@
 <template>
     <section id="services"
         class="flex flex-col items-center gap-12 lg:gap-20 py-24 px-4 sm:px-12 md:px-16 xl:px-20 overflow-x-hidden">
-        <LazySectionHeader title="Services" subtitle="Designed for everyone" />
+        <LazyBaseHeader title="Services" sub-title="Designed for everyone" />
         <div class="flex flex-col lg:flex-row gap-12 w-full">
             <div class="flex flex-col justify-center lg:w-1/2 gap-2 lg:gap-5">
                 <h3 class="text-xl lg:text-2xl font-bold">An app for your patients</h3>
