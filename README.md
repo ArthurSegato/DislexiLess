@@ -1,4 +1,5 @@
 ![DislexiLess screenshot](.github/assets/banner.png)
+[![bun-build](https://github.com/ArthurSegato/DislexiLess/actions/workflows/bun.yml/badge.svg)](https://github.com/ArthurSegato/DislexiLess/actions/workflows/bun.yml)
 <a href="https://donate.stripe.com/7sI29F4lo7Pt80g28a"><img src="https://img.shields.io/badge/Donate-Stripe-ff4757"/></a>
 
 DislexiLess is a solution composed of a web platform (Vue 3/Nest.js) and a mobile application (Flutter) that aims to facilitate the reading process for people with dyslexia and assist healthcare and education professionals in the treatment of individuals with dyslexia.
