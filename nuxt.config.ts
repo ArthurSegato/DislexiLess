@@ -10,21 +10,23 @@ export default defineNuxtConfig({
     preset: "vercel-edge",
   },
   runtimeConfig: {
-    contactWebhook: "",
+    webhooks: {
+      contact: process.env.WEBHOOK_CONTACT,
+    },
     authJs: {
-      secret: process.env.NUXT_AUTH_SECRET,
+      secret: process.env.AUTH_SECRET,
     },
     google: {
-      clientId: process.env.NUXT_GOOGLE_CLIENT_ID,
-      clientSecret: process.env.NUXT_GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     },
     twitter: {
-      clientId: process.env.NUXT_TWITTER_CLIENT_ID,
-      clientSecret: process.env.NUXT_TWITTER_CLIENT_SECRET,
+      clientId: process.env.TWITTER_CLIENT_ID,
+      clientSecret: process.env.TWITTER_CLIENT_SECRET,
     },
     github: {
-      clientId: process.env.NUXT_GITHUB_CLIENT_ID,
-      clientSecret: process.env.NUXT_GITHUB_CLIENT_SECRET,
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
     },
   },
   authJs: {
