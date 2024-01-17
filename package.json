@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "db": "docker compose up dev-db -d",
+    "db": "bun ./generateDB.js",
     "clear": "nuxi cleanup | nuxi prepare",
     "build": "nuxt build",
     "dev": "nuxt dev --host",
@@ -15,7 +15,7 @@
     "@nuxtjs/tailwindcss": "latest",
     "@tailwindcss/typography": "^0.5.10",
     "daisyui": "latest",
-    "nuxt": "^3.9.0",
+    "nuxt": "^3.9.3",
     "vue": "^3.4.5",
     "vue-router": "^4.2.5"
   },
@@ -26,6 +26,7 @@
     "@vercel/analytics": "^1.1.1",
     "@vercel/postgres": "^0.5.1",
     "argon2": "^0.31.2",
-    "postgres": "^3.4.3"
+    "postgres": "^3.4.3",
+    "validator": "^13.11.0"
   }
 }

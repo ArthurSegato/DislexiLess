@@ -1,7 +1,6 @@
 <template>
     <article class="prose" id="privacy">
         <h2>Privacy Policy</h2>
-
         <p>Last Updated: <strong>2024-01-10T22:17:05Z</strong></p>
         <p>Welcome to DislexiLess, a platform comprising a website and a mobile application (collectively
             referred to as "the Platform"). This Privacy Policy outlines how we collect, use, and protect your

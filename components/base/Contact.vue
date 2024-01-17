@@ -1,59 +1,66 @@
 <script setup lang="ts">
-const states = ref({
-    fetching: false,
-    success: false,
-    fail: false,
-})
-const contactForm = reactive({
+import validator from "validator";
+
+const requestState = reactive({
+    isFetching: false,
+    isSuccess: false,
+    isFail: false,
+    message: ''
+});
+
+const formState = reactive({
+    isValid: false,
+});
+
+const formData = reactive({
     name: '',
     company: '',
     email: '',
     phone: '',
     message: '',
-    isValid: false
-})
+});
 
-watch(() => [contactForm.name, contactForm.email, contactForm.message],
-    async ([name, email, message]) => {
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (name.length < 2) contactForm.isValid = false;
-        else if (!emailRegex.test(email)) contactForm.isValid = false;
-        else if (message.length < 2) contactForm.isValid = false;
-        else contactForm.isValid = true;
-    }
-)
+watch(formData, () => {
+    if (
+        !validator.isAlpha(formData.name) ||
+        formData.company.length > 0 &&
+        !validator.isAlpha(formData.company) ||
+        !validator.isEmail(formData.email) ||
+        formData.phone.length > 0 &&
+        !validator.isMobilePhone(formData.phone) ||
+        !validator.isAlpha(formData.message)
+    ) formState.isValid = false;
+    else formState.isValid = true;
+})
 
 const contactHandler = async () => {
     try {
-        states.value.fetching = true;
+        requestState.isFetching = true;
 
         const request = await $fetch('/api/contact', {
             method: 'POST',
-            body: {
-                name: contactForm.name,
-                company: contactForm.company,
-                email: contactForm.email,
-                phone: contactForm.phone,
-                message: contactForm.message
-            }
+            body: formData
         })
 
-        states.value.fetching = false;
-        states.value.success = true;
+        requestState.isFetching = false;
+        requestState.isSuccess = true;
+
+        requestState.message = request.message;
 
         setTimeout(async () => {
-            contactForm.name = ''
-            contactForm.phone = ''
-            contactForm.email = ''
-            contactForm.message = ''
-            contactForm.isValid = false
-            states.value.success = false
+            formData.name = ''
+            formData.phone = ''
+            formData.email = ''
+            formData.message = ''
+            formState.isValid = false
+            requestState.isSuccess = false
         }, 3000);
     }
     catch (error) {
-        states.value.fetching = false;
-        states.value.fail = true;
-        setTimeout(async () => states.value.fail = false, 5000);
+        requestState.isFetching = false;
+        requestState.isFail = true;
+        requestState.message = error.statusMessage;
+        setTimeout(async () => requestState.isFail = false, 5000);
     }
 }
 </script>
@@ -105,8 +112,6 @@ const contactHandler = async () => {
                                 <span class="label-text">Name</span>
                             </label>
                             <div class="join">
-                                <input type="text" placeholder="Type your name here"
-                                    class="input input-bordered w-full join-item" v-model="contactForm.name" />
                                 <span class="btn join-item no-animation cursor-default btn-active btn-ghost">
                                     <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
                                         class="w-6 h-6 fill-none stroke-current" viewBox="0 0 24 24">
@@ -114,6 +119,8 @@ const contactHandler = async () => {
                                             d="M15 9h3.8M15 12h3.8M15 15h3.8M4.4 19.5h15a2.3 2.3 0 0 0 2.3-2.3V6.8a2.3 2.3 0 0 0-2.3-2.3h-15a2.3 2.3 0 0 0-2.3 2.3v10.4a2.3 2.3 0 0 0 2.3 2.3Zm6-10.1a1.9 1.9 0 1 1-3.8 0 1.9 1.9 0 0 1 3.8 0Zm1.3 6.3a6.7 6.7 0 0 1-3.2.8 6.7 6.7 0 0 1-3.1-.8 3.4 3.4 0 0 1 6.3 0Z" />
                                     </svg>
                                 </span>
+                                <input type="text" placeholder="Type your name here"
+                                    class="input input-bordered w-full join-item" v-model="formData.name" />
                             </div>
                         </div>
                         <div class="form-control w-full lg:w-96">
@@ -121,8 +128,6 @@ const contactHandler = async () => {
                                 <span class="label-text">Company <sup><i>Optional</i></sup></span>
                             </label>
                             <div class="join">
-                                <input type="text" placeholder="Your company name, if any"
-                                    class="join-item input input-bordered w-full" v-model="contactForm.company" />
                                 <span class="btn join-item no-animation cursor-default btn-active btn-ghost">
                                     <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
                                         class="w-6 h-6 fill-none stroke-current" viewBox="0 0 24 24">
@@ -130,6 +135,8 @@ const contactHandler = async () => {
                                             d="M2.3 21h19.4M3.8 3v18M14.3 3v18m6-13.5V21M6.7 6.7h.8m-.8 3h.8m-.8 3h.8m3-6h.8m-.8 3h.8m-.8 3h.8M6.7 21v-3.4c0-.6.6-1.1 1.2-1.1H10c.6 0 1.2.5 1.2 1.1V21M3 3h12m-.8 4.5H21m-3.8 3.8h0v0h0v0Zm0 3h0v0h0v0Zm0 3h0v0h0v0Z" />
                                     </svg>
                                 </span>
+                                <input type="text" placeholder="Your company name, if any"
+                                    class="join-item input input-bordered w-full" v-model="formData.company" />
                             </div>
                         </div>
                     </div>
@@ -139,8 +146,6 @@ const contactHandler = async () => {
                                 <span class="label-text">Email</span>
                             </label>
                             <div class="join">
-                                <input type="email" placeholder="your@email.com"
-                                    class="input input-bordered w-full join-item" v-model="contactForm.email" />
                                 <span class="btn join-item no-animation cursor-default btn-active btn-ghost">
                                     <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
                                         class="w-6 h-6 fill-none stroke-current" viewBox="0 0 24 24">
@@ -148,6 +153,8 @@ const contactHandler = async () => {
                                             d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.7 1 3 2.3 3s2.2-1.3 2.2-3a9 9 0 1 0-2.6 6.4M16.5 12V8.2" />
                                     </svg>
                                 </span>
+                                <input type="email" placeholder="your@email.com"
+                                    class="input input-bordered w-full join-item" v-model="formData.email" />
                             </div>
                         </div>
                         <div class="form-control w-full lg:w-96">
@@ -155,8 +162,6 @@ const contactHandler = async () => {
                                 <span class="label-text">Phone <sup><i>Optional</i></sup></span>
                             </label>
                             <div class="join">
-                                <input type="tel" placeholder="Phone number" class="input join-item input-bordered w-full"
-                                    v-model="contactForm.phone" />
                                 <span class="btn join-item no-animation cursor-default btn-active btn-ghost">
                                     <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
                                         class="w-6 h-6 stroke-current fill-none" viewBox="0 0 24 24">
@@ -164,6 +169,8 @@ const contactHandler = async () => {
                                             d="M10.5 1.5H8.2A2.3 2.3 0 0 0 6 3.8v16.4a2.3 2.3 0 0 0 2.3 2.3h7.4a2.3 2.3 0 0 0 2.3-2.3V3.9a2.3 2.3 0 0 0-2.3-2.3h-2.2m-3 0V3h3V1.5m-3 0h3m-3 18.8h3" />
                                     </svg>
                                 </span>
+                                <input type="tel" placeholder="Phone number" class="input join-item input-bordered w-full"
+                                    v-model="formData.phone" />
                             </div>
                         </div>
                     </div>
@@ -172,11 +179,11 @@ const contactHandler = async () => {
                             <span class="label-text">Message</span>
                         </label>
                         <textarea class="textarea textarea-bordered h-28" placeholder="And your message for us"
-                            v-model="contactForm.message"></textarea>
+                            v-model="formData.message"></textarea>
                     </div>
                     <div class="flex justify-end my-2">
-                        <button type="submit" class="btn btn-primary w-full md:w-32 group" :disabled="!contactForm.isValid">
-                            <span class="loading loading-spinner loading-xs" v-if="states.fetching"></span>
+                        <button type="submit" class="btn btn-primary w-full md:w-32 group" :disabled="!formState.isValid">
+                            <span class="loading loading-spinner loading-xs" v-if="requestState.isFetching"></span>
                             <span class="flex gap-2 items-center" v-else>
                                 Send
                                 <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
@@ -191,25 +198,7 @@ const contactHandler = async () => {
                 </form>
             </div>
         </div>
-        <div class="p-4 fixed w-full z-10 bottom-0 transition-all ease-in-out duration-300" v-show="states.success">
-            <div role="alert" class="alert alert-success flex">
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 fill-none"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>We got your message!</span>
-            </div>
-        </div>
-        <div class="p-4 fixed w-full z-10 bottom-0 transition-all ease-in-out duration-300" v-show="states.fail">
-            <div role="alert" class="alert alert-error flex">
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 fill-none"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Oops! An error occurred. Please try again in a few moments!</span>
-            </div>
-        </div>
+        <LazyBaseAlert :isSuccess="true" :message="requestState.message" v-show="requestState.isSuccess" />
+        <LazyBaseAlert :isSuccess="false" :message="requestState.message" v-show="requestState.isFail" />
     </section>
 </template>

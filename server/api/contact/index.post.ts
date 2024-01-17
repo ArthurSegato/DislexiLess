@@ -1,43 +1,25 @@
+import validator from "validator";
+
 export default defineEventHandler(async (event) => {
   try {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const runtimeConfig = useRuntimeConfig();
     const body = await readBody(event);
 
-    if (
-      body.name === null ||
-      body.name === undefined ||
-      body.name.length < 2 ||
-      typeof body.name != "string"
-    )
-      throw new Error(
-        "Name is required, must be a string and have more than two characters"
-      );
+    if (!validator.isAlpha(body.name)) throw new Error("Name must be valid");
 
-    if (!emailRegex.test(body.email))
+    if (body.company.length > 0 && !validator.isAlpha(body.company))
+      throw new Error("Company must be valid");
+
+    if (!validator.isEmail(body.email))
       throw new Error("Email address must be valid");
 
-    if (
-      body.message === null ||
-      body.message === undefined ||
-      body.message.length < 2 ||
-      typeof body.message != "string"
-    )
-      throw new Error(
-        "Message is required, must be a string and have more than two characters"
-      );
+    if (body.phone.length > 0 && !validator.isMobilePhone(body.phone))
+      throw new Error("Phone address must be valid");
 
-    if (body.phone === "" || body.phone === null || body.phone === undefined)
-      body.phone = "N/A";
+    if (!validator.isAlpha(body.message))
+      throw new Error("Message must be valid");
 
-    if (
-      body.company === "" ||
-      body.company === null ||
-      body.company === undefined
-    )
-      body.company = "N/A";
-
-    fetch(runtimeConfig.contactWebhook, {
+    const request = await fetch(runtimeConfig.webhooks.contact, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +34,7 @@ export default defineEventHandler(async (event) => {
               },
               {
                 name: "Company",
-                value: `${body.Company}`,
+                value: `${body.company}`,
               },
               {
                 name: "Email",
@@ -73,8 +55,9 @@ export default defineEventHandler(async (event) => {
         ],
       }),
     });
+
     return {
-      message: "Your message has been received",
+      message: "We got your message",
     };
   } catch (error) {
     if (error instanceof Error) {
