@@ -28,8 +28,7 @@ const formHandler = async () => {
             {
                 email: formData.email,
                 password: formData.password
-            },
-            { callbackUrl: '/dashboard' }
+            }
         )
 
         formData.email = '';
@@ -65,8 +64,6 @@ const togglePassword = async () => passwordType.value = passwordType.value === "
                             <span class="label-text">Email</span>
                         </label>
                         <div class="join">
-                            <input type="email" placeholder="your@email.com" class="input input-bordered w-full join-item"
-                                v-model="formData.email" />
                             <span class="btn join-item no-animation cursor-default btn-active btn-ghost">
                                 <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
                                     class="w-6 h-6 fill-none stroke-current" viewBox="0 0 24 24">
@@ -74,6 +71,8 @@ const togglePassword = async () => passwordType.value = passwordType.value === "
                                         d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.7 1 3 2.3 3s2.2-1.3 2.2-3a9 9 0 1 0-2.6 6.4M16.5 12V8.2" />
                                 </svg>
                             </span>
+                            <input type="email" placeholder="your@email.com" class="input input-bordered w-full join-item"
+                                v-model="formData.email" />
                         </div>
                     </div>
                     <div class="form-control w-full max-w-sm">

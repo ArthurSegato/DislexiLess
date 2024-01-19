@@ -3,20 +3,27 @@ definePageMeta({ middleware: "guest-only" });
 
 import { isEmail, isAlpha, isStrongPassword } from 'validator';
 
+const { signIn } = useAuth();
+
+const accountState = reactive({
+    isFirstStep: true,
+    isSecondStep: false,
+    isThirdStep: false,
+    isLastStep: false,
+    isAccountCreated: false
+});
+
 const requestState = reactive({
     isFetching: false,
-    isSuccess: false,
     isFail: false,
     message: ''
 });
 
 const formState = reactive({
-    isNameAndEmailValid: false,
+    isEmailValid: false,
+    isNameValid: false,
     isPasswordValid: false,
-    isStepTwo: false,
 });
-
-const toggleFormStep = async () => formState.isStepTwo = formState.isStepTwo === false ? true : false;
 
 const formData = reactive({
     name: '',
@@ -25,43 +32,89 @@ const formData = reactive({
 })
 
 watch(formData, () => {
-    // Validate name and email
-    if (!isEmail(formData.email) || !isAlpha(formData.name))
-        formState.isNameAndEmailValid = false;
-    else formState.isNameAndEmailValid = true;
+    // Validate email
+    if (!isEmail(formData.email)) formState.isEmailValid = false;
+    else formState.isEmailValid = true;
+
+    // Validate name
+    if (!isAlpha(formData.name)) formState.isNameValid = false;
+    else formState.isNameValid = true;
 
     // Validate password
     if (!isStrongPassword(formData.password)) formState.isPasswordValid = false;
     else formState.isPasswordValid = true;
 });
 
-const resetForm = async () => {
-    formData.name = '';
-    formData.email = '';
-    formData.password = '';
-    formState.isNameAndEmailValid = false;
-    formState.isPasswordValid = false;
+const handleError = async (e) => {
+    requestState.isFetching = false;
+    requestState.isFail = true;
+    requestState.message = e.statusMessage;
+    setTimeout(async () => requestState.isFail = false, 5000);
+}
+
+const verifyEmail = async () => {
+    try {
+        requestState.isFetching = true;
+
+        const isEmailUsed = await $fetch('/api/auth/verify', {
+            method: 'POST',
+            body: { email: formData.email }
+        })
+
+        if (isEmailUsed) {
+            accountState.isFirstStep = false;
+            accountState.isThirdStep = true;
+            accountState.isAccountCreated = true;
+        } else {
+            accountState.isFirstStep = false;
+            accountState.isSecondStep = true;
+            accountState.isAccountCreated = false;
+        }
+
+        requestState.isFetching = false;
+    }
+    catch (error) {
+        handleError(error);
+    }
 }
 
 const formHandler = async () => {
     try {
         requestState.isFetching = true;
 
-        const request = await $fetch('/api/auth/register', {
-            method: 'POST',
-            body: formData
-        })
+        if (accountState.isAccountCreated) {
+            await $fetch('/api/auth/update', {
+                method: 'POST',
+                body: {
+                    email: formData.email,
+                    password: formData.password
+                }
+            });
 
-        requestState.isFetching = false;
-        requestState.isSuccess = true;
-        resetForm();
+            await signIn(`credentials`,
+                {
+                    email: formData.email,
+                    password: formData.password
+                }
+            )
+        }
+        else {
+            await $fetch('/api/auth/register', {
+                method: 'POST',
+                body: formData
+            })
+            accountState.isThirdStep = false;
+            accountState.isLastStep = true;
+        }
     }
     catch (error) {
-        requestState.isFetching = false;
-        requestState.isFail = true;
-        requestState.message = error.statusMessage;
-        setTimeout(async () => requestState.isFail = false, 5000);
+        handleError(error);
     }
+}
+
+const toggleStep = async () => {
+    accountState.isSecondStep = false;
+    accountState.isThirdStep = true;
 }
 
 /* Toggle password to text logic */
@@ -78,43 +131,16 @@ const togglePassword = async () => passwordType.value = passwordType.value === "
             authorSrc="https://unsplash.com/@charlesetoroma?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
             unsplashSrc="https://unsplash.com/photos/95UF6LXe-Lo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
             footerText="Already have an account?" footerLinkSrc="/auth" footerLinkText="Sign In">
-            <div v-if="requestState.isSuccess">
-                <div class="w-full flex flex-wrap justify-center text-center gap-x-2">
-                    <h3 class="text-5xl font-bold">🥳</h3>
-                    <h3 class="text-5xl font-bold">Welcome aboard!</h3>
-                    <h3 class="text-5xl font-bold">🎉</h3>
-                </div>
-                <p class="text-lg px-8 py-2 text-center">Check your email, we have sent you a link to confirm your account.
-                </p>
-            </div>
-            <div v-else>
+            <div v-show="accountState.isFirstStep">
                 <h1 class="text-4xl font-thin py-8 w-full text-center">Register with</h1>
                 <LazyAuthOauth />
                 <div class="divider">or</div>
-                <form @submit.prevent="formHandler" class="flex flex-col w-full items-center" autocomplete="off">
-                    <div class="form-control w-full max-w-sm" :class="{ 'hidden': formState.isStepTwo }">
-                        <label class="label">
-                            <span class="label-text">Name</span>
-                        </label>
-                        <div class="join">
-                            <input type="text" placeholder="Type your name here"
-                                class="input input-bordered w-full join-item" v-model="formData.name" />
-                            <span class="btn join-item no-animation cursor-default btn-active btn-ghost">
-                                <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
-                                    class="w-6 h-6 fill-none stroke-current" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15 9h3.8M15 12h3.8M15 15h3.8M4.4 19.5h15a2.3 2.3 0 0 0 2.3-2.3V6.8a2.3 2.3 0 0 0-2.3-2.3h-15a2.3 2.3 0 0 0-2.3 2.3v10.4a2.3 2.3 0 0 0 2.3 2.3Zm6-10.1a1.9 1.9 0 1 1-3.8 0 1.9 1.9 0 0 1 3.8 0Zm1.3 6.3a6.7 6.7 0 0 1-3.2.8 6.7 6.7 0 0 1-3.1-.8 3.4 3.4 0 0 1 6.3 0Z" />
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-control w-full max-w-sm" :class="{ 'hidden': formState.isStepTwo }">
+                <form @submit.prevent="verifyEmail" class="flex flex-col w-full items-center" autocomplete="off">
+                    <div class="form-control w-full max-w-sm">
                         <label class="label">
                             <span class="label-text">Email</span>
                         </label>
                         <div class="join">
-                            <input type="email" placeholder="your@email.com" class="input input-bordered w-full join-item"
-                                v-model="formData.email" />
                             <span class="btn join-item no-animation cursor-default btn-active btn-ghost">
                                 <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
                                     class="w-6 h-6 fill-none stroke-current" viewBox="0 0 24 24">
@@ -122,9 +148,56 @@ const togglePassword = async () => passwordType.value = passwordType.value === "
                                         d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.7 1 3 2.3 3s2.2-1.3 2.2-3a9 9 0 1 0-2.6 6.4M16.5 12V8.2" />
                                 </svg>
                             </span>
+                            <input type="email" placeholder="your@email.com" class="input input-bordered w-full join-item"
+                                v-model="formData.email" />
                         </div>
                     </div>
-                    <div class="form-control w-full max-w-sm" :class="{ 'hidden': !formState.isStepTwo }">
+                    <button type="submit" :disabled="!formState.isEmailValid"
+                        class="btn btn-primary btn-block max-w-sm my-4 group">
+                        Next
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
+                            class="w-5 h-5 fill-none stroke-current group-hover:translate-x-1 transition-all ease-in-out duration-300"
+                            viewBox="0 0 24 24" v-show="!requestState.isFetching">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                        </svg>
+                        <span class="loading loading-spinner loading-xs" v-show="requestState.isFetching"></span>
+                    </button>
+                </form>
+            </div>
+            <div v-show="accountState.isSecondStep">
+                <h1 class="text-4xl font-thin py-8 w-full text-center">What should we call you?</h1>
+                <form @submit.prevent="toggleStep" class="flex flex-col w-full items-center" autocomplete="off">
+                    <div class="form-control w-full max-w-sm">
+                        <label class="label">
+                            <span class="label-text">Name</span>
+                        </label>
+                        <div class="join">
+                            <span class="btn join-item no-animation cursor-default btn-active btn-ghost">
+                                <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
+                                    class="w-6 h-6 fill-none stroke-current" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 9h3.8M15 12h3.8M15 15h3.8M4.4 19.5h15a2.3 2.3 0 0 0 2.3-2.3V6.8a2.3 2.3 0 0 0-2.3-2.3h-15a2.3 2.3 0 0 0-2.3 2.3v10.4a2.3 2.3 0 0 0 2.3 2.3Zm6-10.1a1.9 1.9 0 1 1-3.8 0 1.9 1.9 0 0 1 3.8 0Zm1.3 6.3a6.7 6.7 0 0 1-3.2.8 6.7 6.7 0 0 1-3.1-.8 3.4 3.4 0 0 1 6.3 0Z" />
+                                </svg>
+                            </span>
+                            <input type="text" placeholder="Type your name here"
+                                class="input input-bordered w-full join-item" v-model="formData.name" />
+                        </div>
+                    </div>
+                    <button type="submit" :disabled="!formState.isNameValid"
+                        class="btn btn-primary btn-block max-w-sm my-4 group">
+                        Next
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
+                            class="w-5 h-5 fill-none stroke-current group-hover:translate-x-1 transition-all ease-in-out duration-300"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+            <div v-show="accountState.isThirdStep">
+                <h1 class="text-4xl font-thin py-8 w-full text-center">And finally...</h1>
+                <form @submit.prevent="formHandler" class="flex flex-col w-full items-center" autocomplete="off">
+                    <div class="form-control w-full max-w-sm">
                         <label class="label">
                             <span class="label-text">Password</span>
                         </label>
@@ -148,21 +221,21 @@ const togglePassword = async () => passwordType.value = passwordType.value === "
                             </button>
                         </div>
                     </div>
-                    <button type="button" :disabled="!formState.isNameAndEmailValid" @click="toggleFormStep"
-                        class="btn btn-primary btn-block max-w-sm my-4 group" :class="{ 'hidden': formState.isStepTwo }">
-                        Next
-                        <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"
-                            class="w-5 h-5 fill-none stroke-current group-hover:translate-x-1 transition-all ease-in-out duration-300"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                        </svg>
-                    </button>
                     <button type="submit" :disabled="!formState.isPasswordValid"
-                        class="btn btn-primary btn-block max-w-sm my-4" :class="{ 'hidden': !formState.isStepTwo }">
+                        class="btn btn-primary btn-block max-w-sm my-4">
                         <span class="loading loading-spinner loading-xs" v-if="requestState.isFetching"></span>
                         <span v-else>Register</span>
                     </button>
                 </form>
+            </div>
+            <div v-show="accountState.isLastStep">
+                <div class="w-full flex flex-wrap justify-center text-center gap-x-2">
+                    <h3 class="text-5xl font-bold">🥳</h3>
+                    <h3 class="text-5xl font-bold">Welcome aboard!</h3>
+                    <h3 class="text-5xl font-bold">🎉</h3>
+                </div>
+                <p class="text-lg px-8 py-2 text-center">Check your email, we have sent you a link to confirm your account.
+                </p>
             </div>
             <LazyAuthAlert :isSuccess="false" :message="requestState.message" v-show="requestState.isFail" />
         </NuxtLayout>

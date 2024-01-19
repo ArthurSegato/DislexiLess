@@ -1,29 +1,49 @@
 import validator from "validator";
-import postgres from "postgres";
+import { sql } from "@vercel/postgres";
 import * as argon2 from "argon2";
 
-const sql = postgres(process.env.POSTGRES_URL);
+const generateRandomCode = () => {
+  const characters =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let code = "";
+
+  for (let i = 0; i < 6; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    code += characters.charAt(randomIndex);
+  }
+
+  return code;
+};
 
 export default defineEventHandler(async (event) => {
   try {
-    const runtimeConfig = useRuntimeConfig();
+    // Get request body
     const body = await readBody(event);
 
+    // Valiate Name
     if (!validator.isAlpha(body.name)) throw new Error("Name must be valid");
 
+    // Valiate Email
     if (!validator.isEmail(body.email))
       throw new Error("Email address must be valid");
 
+    // Valiate Password
     if (!validator.isStrongPassword(body.password))
       throw new Error("Password must be valid");
 
-    const [user] = await sql`SELECT id FROM users WHERE email = ${body.email}`;
+    // Hash the password
+    const passwordHash = await argon2.hash(body.password);
 
-    if (user) throw new Error("User already registered.");
+    // Save user in db
+    await sql`INSERT INTO users (name, email, password)
+              VALUES (${body.name}, ${body.email}, ${passwordHash});`;
 
-    const [user] = await sql`INSERT INTO users (username, password, email)
-                VALUES ('new_user', 'password123', 'user@example.com');
-    `;
+    // Get id of the created user
+    const getId = await sql`SELECT id FROM users WHERE email = ${body.email}`;
+
+    // Register CredentialsProvider account in db
+    await sql`INSERT INTO accounts ("userId", type, provider, "providerAccountId")
+              VALUES (${getId.rows[0].id}, 'credentials', 'credentials',  1337);`;
 
     return {
       message: "Your account has been created",
