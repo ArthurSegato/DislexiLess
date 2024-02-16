@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { status } = useAuth()
+const status = false;
 const isNavOpen = ref(false);
 </script>
 

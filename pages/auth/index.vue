@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({ middleware: "guest-only" });
-
-const { signIn } = useAuth();
-
 const passwordType = ref("password");
 
 const signInFail = ref(false);
@@ -24,12 +20,14 @@ watch(() => [formData.email, formData.password],
 
 const formHandler = async () => {
     try {
-        const request = await signIn(`credentials`,
+        /*
+        await signIn(`credentials`,
             {
                 email: formData.email,
                 password: formData.password
             }
         )
+        */
 
         formData.email = '';
         formData.password = '';

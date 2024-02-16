@@ -1,41 +1,26 @@
-import { resolve } from "node:path";
-
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  alias: {
-    cookie: resolve(__dirname, "node_modules/cookie"),
-  },
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "@nuxt/image", "@hebilicious/authjs-nuxt"],
-  nitro: {
-    preset: "vercel-edge",
-  },
+  modules: ["@nuxt/image", "@nuxtjs/tailwindcss"],
   runtimeConfig: {
-    webhooks: {
-      contact: process.env.WEBHOOK_CONTACT,
+    crypto: {
+      key: process.env.CRYPTO_KEY,
     },
-    authJs: {
-      secret: process.env.AUTH_SECRET,
-    },
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    },
-    twitter: {
-      clientId: process.env.TWITTER_CLIENT_ID,
-      clientSecret: process.env.TWITTER_CLIENT_SECRET,
+    auth: {
+      name: "nuxt-session",
+      password: process.env.NUXT_AUTH_PASSWORD || "",
     },
     github: {
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     },
   },
-  authJs: {
-    verifyClientOnEveryRequest: true,
-    guestRedirectTo: "/auth",
-    authenticatedRedirectTo: "/dashboard",
-    baseUrl: "http://localhost:3000",
-  },
-  image: {
-    format: ["avif", "webp"],
+  nitro: {
+    storage: {
+      ".data:auth": {
+        driver: "fs",
+        base: "./.data/auth",
+      },
+    },
   },
 });

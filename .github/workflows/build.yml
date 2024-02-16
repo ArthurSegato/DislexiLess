@@ -1,12 +1,14 @@
-name: bun-build
+name: build
+
 on: [push]
+
 jobs:
-  bun-build:
-    name: build-project
+  build:
+    name: build
     runs-on: ubuntu-latest
     steps:
       # Install bun
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
 
       # Install dependencies

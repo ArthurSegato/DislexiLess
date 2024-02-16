@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "db": "bun ./generateDB.js",
+    "dev:db": "bun ./generate-db.js",
     "clear": "nuxi cleanup | nuxi prepare",
     "build": "nuxt build",
     "dev": "nuxt dev --host",
@@ -12,24 +12,20 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxt/image": "latest",
     "@nuxtjs/tailwindcss": "latest",
     "@tailwindcss/typography": "^0.5.10",
     "daisyui": "latest",
-    "nuxt": "^3.9.3",
-    "vue": "^3.4.5",
+    "nuxt": "^3.10.2",
+    "vue": "^3.4.14",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@auth/core": "^0.20.0",
-    "@auth/pg-adapter": "^0.2.13",
-    "@hebilicious/authjs-nuxt": "^0.3.5",
-    "@nuxt/image": "^1.1.0",
-    "@vercel/analytics": "^1.1.1",
-    "@vercel/postgres": "^0.5.1",
+    "@vercel/analytics": "^1.1.2",
+    "@vercel/postgres": "^0.7.2",
     "argon2": "^0.31.2",
-    "next-auth": "^4.24.5",
-    "pg": "^8.11.3",
-    "uuid": "^9.0.1",
+    "uncrypto": "^0.1.3",
+    "unstorage": "^1.10.1",
     "validator": "^13.11.0"
   }
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { status } = useAuth();
+const status = false;
 </script>
 
 <template>
@@ -48,7 +48,7 @@ const { status } = useAuth();
                 </ul>
             </div>
             <div class="mt-12 p-0">
-                <NuxtLink to="/dashboard" class="btn btn-block" tabindex="0" v-if="status === 'authenticated'">
+                <NuxtLink to="/dashboard" class="btn btn-block" tabindex="0" v-if="status">
                     Access the dashboard
                 </NuxtLink>
                 <NuxtLink to="/auth/register" class="btn btn-block" tabindex="0" v-else>

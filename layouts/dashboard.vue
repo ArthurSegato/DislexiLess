@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { session, signOut } = useAuth()
+definePageMeta({
+    auth: true,
+});
 const isNavOpen = ref(false);
 const isMenuOpen = ref(false);
 </script>
@@ -37,7 +39,7 @@ const isMenuOpen = ref(false);
                     </button>
                     <button @click="isMenuOpen = !isMenuOpen" class="btn btn-ghost btn-circle avatar placeholder" v-else>
                         <div class="bg-neutral text-neutral-content rounded-full w-10">
-                            <span>{{ session?.user?.name?.charAt(0) }}</span>
+                            <span>{{ $auth.session.value?.name.charAt(0) }}</span>
                         </div>
                     </button>
                 </div>
@@ -47,7 +49,7 @@ const isMenuOpen = ref(false);
                     <NuxtLink to="/dashboard/settings">Settings</NuxtLink>
                 </li>
                 <li>
-                    <button @click="signOut()">Sign Out</button>
+                    <button @click="authLogout()">Sign Out</button>
                 </li>
             </ul>
         </header>
