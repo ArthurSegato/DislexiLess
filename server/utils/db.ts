@@ -1,50 +1,42 @@
 import { sql } from "@vercel/postgres";
 
-export interface EncryptedUser {
-  name: {
-    cipher: string;
-    iv: string;
-  };
+export interface RetrievedUserData {
+  id: string;
+  name: string;
   email: string;
-  password: {
-    cipher: string;
-    iv: string;
-  };
+  image: string;
+  password: string;
 }
 
-export const createUser = async (user: EncryptedUser) => {
-  const { name, email, password } = user;
-  // Check if a user with the provided email already exists
-  if (!emailExistsInDatabase(email))
-    throw createError({ message: "User already exists!", statusCode: 409 });
+export interface StoredUserData {
+  name: string;
+  email: string;
+  password: string;
+}
 
-  // Save the encrypted user data to the database
-  await sql`INSERT INTO users (name, iv_name, email, password, iv_password)
-    VALUES (${name.cipher}, ${name.iv}, ${email},
-            ${password.cipher}, ${password.iv});`;
+// Save the user to the database
+export const createUser = async (user: StoredUserData) => {
+  await sql`INSERT INTO users (name, email, password) 
+            VALUES (${user.name}, ${user.email}, ${user.password});`;
 };
 
 export const findUserByEmail = async (
   email: string
-): Promise<EncryptedUser | false> => {
+): Promise<RetrievedUserData | false> => {
   // Search for the user's data in the database based on their email
-  const { rows } = await sql`SELECT name, iv_name, email, password, iv_password
-    FROM users WHERE email = ${email}`;
+  const { rows } =
+    await sql`SELECT id, name, email, image, password FROM users WHERE email = ${email}`;
 
   // If no user with the given email is found, return false
   if (!rows.length) return false;
   // If a user is found, return their encrypted data
   else
     return {
-      name: {
-        cipher: rows[0].name,
-        iv: rows[0].iv_name,
-      },
+      id: rows[0].id,
+      name: rows[0].name,
       email: rows[0].email,
-      password: {
-        cipher: rows[0].password,
-        iv: rows[0].iv_password,
-      },
+      image: rows[0].image,
+      password: rows[0].password,
     };
 };
 

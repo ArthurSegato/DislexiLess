@@ -1,6 +1,4 @@
 <script setup lang="ts">
-definePageMeta({ middleware: "guest-only" });
-
 import { isEmail, isAlpha, isStrongPassword } from 'validator';
 
 const { signIn } = useAuth();

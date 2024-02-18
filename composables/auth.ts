@@ -1,5 +1,13 @@
 export const useAuth = () => useNuxtApp().$auth;
 
+export const githubLogin = async () => {
+  const github = useRuntimeConfig().github;
+
+  await navigateTo(
+    `https://github.com/login/oauth/authorize?client_id=${github.clientId}&scope=user`
+  );
+};
+
 export const authLogin = async (email: string, password: string) => {
   await $fetch("/api/auth/login", {
     method: "POST",

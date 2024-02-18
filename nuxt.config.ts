@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     },
     auth: {
       name: "nuxt-session",
-      password: process.env.NUXT_AUTH_PASSWORD || "",
+      password: process.env.NUXT_AUTH_PASSWORD,
     },
     github: {
       clientId: process.env.GITHUB_CLIENT_ID,
@@ -17,9 +17,8 @@ export default defineNuxtConfig({
   },
   nitro: {
     storage: {
-      ".data:auth": {
-        driver: "fs",
-        base: "./.data/auth",
+      session: {
+        driver: "vercelKV",
       },
     },
   },

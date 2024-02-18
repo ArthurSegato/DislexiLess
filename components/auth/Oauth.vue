@@ -1,6 +1,6 @@
 <template>
     <div class="flex gap-2 w-full justify-center">
-        <button @click="" class="btn">
+        <button @click="githubLogin()" class="btn">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 16 16">
                 <path
                     d="M15.5 6.6a9.4 9.4 0 0 1 .2 1.6 8 8 0 0 1-2.4 5.9A7.7 7.7 0 0 1 8 16 8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.4 2L11 4.5a4.3 4.3 0 0 0-3-1.3c-2 0-3.9 1.4-4.5 3.3a4.8 4.8 0 0 0 0 3A4.8 4.8 0 0 0 8 12.8c1 0 2-.2 2.7-.7a3.7 3.7 0 0 0 1.6-2.5H8v-3z" />

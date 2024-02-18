@@ -1,4 +1,3 @@
-import { getRandomValues, subtle } from "uncrypto";
 import * as argon2 from "argon2";
 
 // Constants
@@ -14,16 +13,23 @@ export const encryptSymmetric = async (data: string) => {
     // Get encryption key
     const key = runtimeConfig.crypto.key;
 
+    // Convert the key from base64 to ArrayBuffer
+    const keyBuffer = Buffer.from(key, "base64");
+    const keyArrayBuffer = keyBuffer.buffer.slice(
+      keyBuffer.byteOffset,
+      keyBuffer.byteOffset + keyBuffer.byteLength
+    );
+
     // Generate a random 96-bit initialization vector (IV)
-    const iv = getRandomValues(new Uint8Array(IV_LENGTH));
+    const iv = crypto.getRandomValues(new Uint8Array(IV_LENGTH));
 
     // Encode the data using UTF-8 encoding
     const encodedData = new TextEncoder().encode(data);
 
     // Prepare the secret key for encryption
-    const secretKey = await subtle.importKey(
+    const secretKey = await crypto.subtle.importKey(
       "raw",
-      Buffer.from(key, "base64"),
+      keyArrayBuffer,
       {
         name: "AES-GCM",
         length: AES_GCM_KEY_LENGTH,
@@ -33,7 +39,7 @@ export const encryptSymmetric = async (data: string) => {
     );
 
     // Encrypt the data using the secret key and IV
-    const encryptedData = await subtle.encrypt(
+    const encryptedData = await crypto.subtle.encrypt(
       {
         name: "AES-GCM",
         iv,
@@ -60,7 +66,7 @@ export const decryptSymmetric = async (cipher: string, iv: string) => {
     const key = runtimeConfig.crypto.key;
 
     // Prepare the secret key for decryption
-    const secretKey = await subtle.importKey(
+    const secretKey = await crypto.subtle.importKey(
       "raw",
       Buffer.from(key, "base64"),
       {
@@ -72,7 +78,7 @@ export const decryptSymmetric = async (cipher: string, iv: string) => {
     );
 
     // Decrypt the encrypted data using the secret key and IV
-    const data = await subtle.decrypt(
+    const data = await crypto.subtle.decrypt(
       {
         name: "AES-GCM",
         iv: Buffer.from(iv, "base64"),

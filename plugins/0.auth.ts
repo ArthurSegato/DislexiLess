@@ -35,6 +35,17 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     { global: true }
   );
 
+  addRouteMiddleware(
+    "auth",
+    (to) => {
+      if (to.meta.auth && !loggedIn.value) {
+        redirectTo.value = to.path;
+        return "/login";
+      }
+    },
+    { global: true }
+  );
+
   const currentRoute = useRoute();
 
   if (process.client) {

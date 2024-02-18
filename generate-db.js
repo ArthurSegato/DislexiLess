@@ -8,12 +8,10 @@ import { sql } from '@vercel/postgres';
   await sql`CREATE TABLE users
     (
       id SERIAL,
-      name VARCHAR(255),
-      iv_name VARCHAR(255),
-      email VARCHAR(255),
+      name TEXT,
+      email TEXT UNIQUE,
       image TEXT,
-      password VARCHAR(255),
-      iv_password VARCHAR(255),
+      password TEXT,
     
       PRIMARY KEY (id)
     );`

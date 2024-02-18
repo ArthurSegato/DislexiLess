@@ -21,7 +21,9 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@upstash/redis": "^1.28.4",
     "@vercel/analytics": "^1.1.2",
+    "@vercel/kv": "^1.0.1",
     "@vercel/postgres": "^0.7.2",
     "argon2": "^0.31.2",
     "uncrypto": "^0.1.3",
