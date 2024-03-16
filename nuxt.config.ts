@@ -17,8 +17,11 @@ export default defineNuxtConfig({
   },
   nitro: {
     storage: {
-      session: {
+      redis: {
         driver: "vercelKV",
+      },
+      browser: {
+        driver: "local",
       },
     },
   },

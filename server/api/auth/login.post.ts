@@ -35,12 +35,17 @@ export default eventHandler(async (event) => {
     });
   }
 
-  const sessionKey = await createUserSession({
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    image: user.image,
-  });
+  const ttl = 86400;
+
+  const sessionKey = await createUserSession(
+    {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      image: user.image,
+    },
+    ttl
+  );
 
   return sessionKey;
 });

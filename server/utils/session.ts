@@ -16,7 +16,7 @@ export const retrieveUserSession = async (
 ): Promise<SessionData> => {
   try {
     // Retrieve the storage mechanism for sessions
-    const storage = useStorage("session");
+    const storage = useStorage("redis");
 
     // Retrieve the session data
     const sessionData = await storage.getItem(key);
@@ -39,7 +39,7 @@ export const retrieveUserSession = async (
 export const terminateUserSession = async (key: string): Promise<Object> => {
   try {
     // Retrieve the storage mechanism for sessions
-    const storage = useStorage("session");
+    const storage = useStorage("redis");
 
     // Abort if session is not found
     if (!(await storage.hasItem(key))) {
@@ -60,7 +60,8 @@ export const terminateUserSession = async (key: string): Promise<Object> => {
 };
 
 export const createUserSession = async (
-  user: SessionData
+  user: SessionData,
+  ttl: number
 ): Promise<SessionKey> => {
   try {
     // Abort if a user was not provided
@@ -72,7 +73,7 @@ export const createUserSession = async (
       });
 
     // Retrieve the storage mechanism for sessions
-    const storage = useStorage("session");
+    const storage = useStorage("redis");
 
     // Generate session key
     const key = generateSessionKey(user.email);
@@ -86,7 +87,9 @@ export const createUserSession = async (
     }
 
     // Create session
-    await storage.setItem(key, user);
+    await storage.setItem(key, user, {
+      ttl,
+    });
 
     // Return session key
     return { key };
