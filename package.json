@@ -3,15 +3,23 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "pretify": "bun prettier . --write",
+    "clear": "nuxt cleanup && nuxt prepare",
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/tailwindcss": "^6.12.0",
     "nuxt": "^3.11.2",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2"
+  },
+  "devDependencies": {
+    "daisyui": "^4.11.1",
+    "prettier": "3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.14"
   }
 }
