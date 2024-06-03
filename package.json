@@ -3,9 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "clear": "nuxt cleanup && nuxt prepare",
     "pretify": "prettier . --write",
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
